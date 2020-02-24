@@ -11,7 +11,7 @@ class Reservatie():
     def __init__(self, resId, zoneId, dag,  start, duur, voertuigen, p1,p2):
         self.resId=resId
         self.zoneid=zoneId
-        self.dag
+        self.dag=dag
         self.start=start
         self.duur=duur
         self.voertuigen=voertuigen
