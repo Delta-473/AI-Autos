@@ -1,17 +1,17 @@
 class Reservatie():
-	resId=""
-	zoneid=""
-	dag
-	start=0
-	duur=0
-	voertuigen[]
-	pentalty1=0
-	pentalty2=0
+    resId=""
+    zoneId=""
+    dag=0
+    start=0
+    duur=0
+    voertuigen=""
+    pentalty1=0
+    pentalty2=0
 
-    def __init__(self, resId, zoneId, dag,  start, duur, voertuigen[], p1,p2):
+    def __init__(self, resId, zoneId, dag,  start, duur, voertuigen, p1,p2):
         self.resId=resId
         self.zoneid=zoneId
-        self.dag
+        self.dag=dag
         self.start=start
         self.duur=duur
         self.voertuigen=voertuigen
@@ -27,5 +27,3 @@ class Reservatie():
         print("voertuigen",self.voertuigen)
         print("pentalty1",self.pentalty1)
         print("pentalty2",self.pentalty2)
-
-

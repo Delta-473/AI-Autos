@@ -1,5 +1,5 @@
 import data;
-class 	Voertuig(data):
+class Voertuig(data):
     id=""
     zoneId=""
     def __init__(self,id):
