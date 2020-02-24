@@ -23,12 +23,12 @@ class Inlees():
             line=line.split(";")
             requests=line[0]
             zone=line[1]
-            dag=int(line[3])
-            start=int(line[4])
-            duur=int(line[5])
-            cars=line[6]
-            penalty1=line[7]
-            penalty2=line[8]
+            dag=int(line[2])
+            start=int(line[3])
+            duur=int(line[4])
+            cars=line[5]
+            penalty1=line[6]
+            penalty2=line[7]
             res=Reservatie(requests,zone,dag,start,duur,cars,penalty1,penalty2)
             res.__str__()
             

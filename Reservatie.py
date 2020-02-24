@@ -1,10 +1,10 @@
 class Reservatie():
     resId=""
-    zoneid=""
-    dag
+    zoneId=""
+    dag=0
     start=0
     duur=0
-    voertuigen
+    voertuigen=""
     pentalty1=0
     pentalty2=0
 
