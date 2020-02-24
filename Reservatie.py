@@ -27,6 +27,3 @@ class Reservatie():
         print("voertuigen",self.voertuigen)
         print("pentalty1",self.pentalty1)
         print("pentalty2",self.pentalty2)
-
->>>>>>> origin/master
-
