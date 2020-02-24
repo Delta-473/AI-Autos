@@ -1,4 +1,4 @@
-class 	Voertuig():
+class Voertuig():
     id=""
     zoneId=""
     def __init__(self,id):
