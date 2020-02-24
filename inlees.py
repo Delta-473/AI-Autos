@@ -17,8 +17,18 @@ class Inlees():
         print('contens of line[1]',line[1])
         aantalRequests = int(line[1])
         print(aantalRequests)
-        
-
+        for (aantalRequests):
+            line=self.file.readline()
+            line=line.split(";")
+            requests=line[0]
+            zone=line[1]
+            dag=int(line[3])
+            start=int(line[4])
+            end=int(line[5])
+            cars=line[6]
+            penalty1=line[7]
+            penalty2=line[8]
+            
 
 
 
