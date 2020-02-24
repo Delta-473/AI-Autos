@@ -1,0 +1,27 @@
+
+Classes:
+	voertuig
+		id String
+		Zone String
+	Zone
+		id String
+		zone aanliggende [] Strings
+	reservatie
+		id String
+		dag int
+		zone-id String
+		start int
+		duur int
+		voertuigen[] Strings
+		pentalty1 int
+		pentalty2 int
+
+loop over res
+	if toegewezen():
+		sum+=0
+	elsif niet_toegewezen():
+		sum+=p1
+	elsif  toegewezen_ maar_aanliggende_zone:
+		sum+=p2
+	else: error
+
