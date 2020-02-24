@@ -1,3 +1,4 @@
+from Reservatie import Reservatie
 class Inlees():
     file=None
     location=""
@@ -17,8 +18,20 @@ class Inlees():
         print('contens of line[1]',line[1])
         aantalRequests = int(line[1])
         print(aantalRequests)
-        
-
+        for i in range(aantalRequests):
+            line=self.file.readline()
+            line=line.split(";")
+            requests=line[0]
+            zone=line[1]
+            dag=int(line[2])
+            start=int(line[3])
+            duur=int(line[4])
+            cars=line[5]
+            penalty1=line[6]
+            penalty2=line[7]
+            res=Reservatie(requests,zone,dag,start,duur,cars,penalty1,penalty2)
+            res.__str__()
+            
 
 
 
