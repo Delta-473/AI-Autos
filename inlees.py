@@ -41,8 +41,9 @@ class Inlees():
             line=line.split(';')
             print(line[0])
             print(line[1])
-            
-            zon=Zone(line[0],line[1])
+            eigenZone=line[0]
+            aanliggendeZone=line[1]
+            zon=Zone(eigenZone,aanliggendeZone)
             zon.__str__()
         
 
