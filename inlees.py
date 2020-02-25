@@ -1,5 +1,5 @@
-from Reservatie import Reservatie
-from Zone import Zone
+from models.Reservatie import Reservatie
+from models.Zone import Zone
 
 class Inlees():
     file=None

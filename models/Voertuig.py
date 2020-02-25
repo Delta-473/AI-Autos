@@ -1,4 +1,6 @@
-import data;
+from models import data
+
+
 class Voertuig(data):
     id=""
     zoneId=""
