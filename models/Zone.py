@@ -4,7 +4,7 @@ class Zone():
     zoneId=""
     neighbours=""
 
-    def _init_(self, zoneId, neighbours):
+    def __init__(self, zoneId, neighbours):
         self.zoneId= zoneId
         self.neighbours = neighbours
        
