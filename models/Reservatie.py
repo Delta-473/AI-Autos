@@ -10,20 +10,15 @@ class Reservatie():
 
     def __init__(self, resId, zoneId, dag,  start, duur, voertuigen, p1,p2):
         self.resId=resId
-        self.zoneid=zoneId
+        self.zoneId=zoneId
         self.dag=dag
         self.start=start
         self.duur=duur
         self.voertuigen=voertuigen
         self.pentalty1=p1
         self.pentalty2=p2
-       
-    def  __str__(self):
-        print("resId",self.resId)
-        print("zoneid",self.zoneId)
-        print("dag",self.dag)
-        print("start",self.start)
-        print("duur",self.duur)
-        print("voertuigen",self.voertuigen)
-        print("pentalty1",self.pentalty1)
-        print("pentalty2",self.pentalty2)
+
+    def __str__(self):
+        return "resID: %s, zoneID: %s, dag: %s, start: %s, duur: %s, voertuigen: %s, penalty1: %s, penalty2: %s" % \
+               (self.resId, self.zoneId, self.dag, self.start, self.duur, self.voertuigen, self.pentalty1, self.pentalty2)
+

@@ -32,7 +32,7 @@ class Inlees():
             penalty1=line[6]
             penalty2=line[7]
             res=Reservatie(request,zone,dag,start,duur,cars,penalty1,penalty2)
-            res.__str__()
+            print(res)
             requests.append(res)
             
         line=self.file.readline()
@@ -48,7 +48,7 @@ class Inlees():
             eigenZone=line[0]
             aanliggendeZone=line[1]
             zone=Zone(eigenZone,aanliggendeZone)
-            zone.__str__()
+            print(zone)
             zones.append(zone)
         
         line=self.file.readline()
