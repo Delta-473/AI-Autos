@@ -60,7 +60,7 @@ class Inlees():
         for k in range(aantalCars):
             line=self.file.readline()
             print(line)
-            voertuig=line
+            voertuig=line.rstrip('\n')
             car=Voertuig(voertuig)
             voertuigen.append(car)
             

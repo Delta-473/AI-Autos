@@ -10,4 +10,4 @@ class Voertuig():
         print("voertuig made",self.id)
 
     def __str__(self):
-        return "Voertuig ID: %s en zone ID: %s" % (self.id, self.zoneId)
+        return f"Voertuig ID: {self.id} en zone ID: {self.zoneId}"
