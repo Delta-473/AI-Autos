@@ -12,14 +12,14 @@ class Inlees():
         
        
     
-    def lees(self):
+    def lees(self, reservaties, zones, voertuigen):
         line=self.file.readline()
         
+        #Reversaties inlezen
         print("contens of line",line)
         line=line.split(': ')
         aantalRequests = int(line[1])
         print(aantalRequests)
-        requests=[]
         for i in range(aantalRequests):
             line=self.file.readline()
             line=line.split(";")
@@ -33,12 +33,13 @@ class Inlees():
             penalty2=line[7]
             res=Reservatie(request,zone,dag,start,duur,cars,penalty1,penalty2)
             print(res)
-            requests.append(res)
-            
+            reservaties.append(res)
+
+        # Zones inlezen
         line=self.file.readline()
         line=line.split(': ')
         aantalZones = int(line[1])
-        zones=[]
+
         for j in range(aantalZones):
             line=self.file.readline()
             print(line)
@@ -51,16 +52,17 @@ class Inlees():
             print(zone)
             zones.append(zone)
         
+        #Voertuigen inlezen
         line=self.file.readline()
         line=line.split(': ')
         aantalCars = int(line[1])
-        cars=[]
+
         for k in range(aantalCars):
             line=self.file.readline()
             print(line)
             voertuig=line
             car=Voertuig(voertuig)
-            cars.append(car)
+            voertuigen.append(car)
             
         line=self.file.readline()
         line=line.split(': ')
@@ -73,6 +75,10 @@ class Inlees():
 def main():
     print("program started")
     inlees=Inlees("data/100_5_14_25.csv")
-    inlees.lees()
-    
+    reservaties = []
+    zones = []
+    voertuigen = []
+
+    inlees.lees(reservaties, zones, voertuigen)
+
 main()
