@@ -10,6 +10,10 @@ class Main():
     ofilepath = ""
     penaltyscore = 0
 
+    reservaties=[]
+    zones=[]
+    voertuigen=[]
+
     def __init__(self):
         pass
 
@@ -24,19 +28,12 @@ class Main():
     def main(self):
         self.parsearguments()
 
-        reservaties=[]
-        zones=[]
-        voertuigen=[]
+
         inlees = Inlees(self.ifilepath)
-        inlees.lees(reservaties, zones, voertuigen)
+        inlees.lees(self.reservaties, self.zones, self.voertuigen)
 
 
         output = Output(self.ofilepath)
-        reservaties = []
-        zones = []
-        voertuigen = []
-
-        inlees.lees(reservaties, zones, voertuigen)
 
         output.schrijven(self.penaltyscore, reservaties, voertuigen)
 
