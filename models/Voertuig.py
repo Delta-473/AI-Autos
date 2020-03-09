@@ -9,5 +9,8 @@ class Voertuig():
         self.id=id
         print("voertuig made",self.id)
 
+    def getID(self):
+        return self.id
+
     def __str__(self):
         return f"Voertuig ID: {self.id} en zone ID: {self.zoneId}"
