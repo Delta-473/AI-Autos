@@ -23,7 +23,14 @@ class Main():
 
     def main(self):
         self.parsearguments()
+
         inlees = Inlees(self.ifilepath)
+        reservaties=[]
+        zones=[]
+        voertuigen=[]
+        inlees.lees(reservaties, zones, voertuigen)
+
+
         output = Output(self.ofilepath)
         reservaties = []
         zones = []

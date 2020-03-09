@@ -5,16 +5,16 @@ from models.Voertuig import Voertuig
 class Inlees():
     file=None
     location=""
-    
+
     def __init__(self, location):
         self.location=location
         self.file=open((self.location),"r+")
-        
-       
-    
+
+
+
     def lees(self, reservaties, zones, voertuigen):
         line=self.file.readline()
-        
+
         #Reversaties inlezen
         print("contens of line",line)
         line=line.split(': ')
@@ -51,7 +51,7 @@ class Inlees():
             zone=Zone(eigenZone,aanliggendeZone)
             print(zone)
             zones.append(zone)
-        
+
         #Voertuigen inlezen
         line=self.file.readline()
         line=line.split(': ')
@@ -63,22 +63,8 @@ class Inlees():
             voertuig=line.rstrip('\n')
             car=Voertuig(voertuig)
             voertuigen.append(car)
-            
+
         line=self.file.readline()
         line=line.split(': ')
         aantalDagen = int(line[1])
         print(aantalDagen)
-        
-
-
-
-def main():
-    print("program started")
-    inlees=Inlees("data/100_5_14_25.csv")
-    reservaties = []
-    zones = []
-    voertuigen = []
-
-    inlees.lees(reservaties, zones, voertuigen)
-
-main()
