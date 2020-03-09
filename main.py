@@ -24,10 +24,10 @@ class Main():
     def main(self):
         self.parsearguments()
 
-        inlees = Inlees(self.ifilepath)
         reservaties=[]
         zones=[]
         voertuigen=[]
+        inlees = Inlees(self.ifilepath)
         inlees.lees(reservaties, zones, voertuigen)
 
 

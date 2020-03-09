@@ -23,6 +23,7 @@ class Inlees():
         for i in range(aantalRequests):
             line=self.file.readline()
             line=line.split(";")
+
             request=line[0]
             zone=line[1]
             dag=int(line[2])
@@ -31,6 +32,7 @@ class Inlees():
             cars=line[5]
             penalty1=line[6]
             penalty2=line[7]
+
             res=Reservatie(request,zone,dag,start,duur,cars,penalty1,penalty2)
             print(res)
             reservaties.append(res)
@@ -44,10 +46,12 @@ class Inlees():
             line=self.file.readline()
             print(line)
             line=line.split(';')
+
             print(line[0])
             print(line[1])
             eigenZone=line[0]
             aanliggendeZone=line[1]
+
             zone=Zone(eigenZone,aanliggendeZone)
             print(zone)
             zones.append(zone)
@@ -61,6 +65,7 @@ class Inlees():
             line=self.file.readline()
             print(line)
             voertuig=line.rstrip('\n')
+
             car=Voertuig(voertuig)
             voertuigen.append(car)
 
