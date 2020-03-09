@@ -10,7 +10,6 @@ class Output():
         self.file = open(filepath, "w")
 
     def schrijven(self, penaltyscore, reservaties, voertuigen):
-        print("not implemented")
 
         #penaltyscore
         self.buffer = f"{penaltyscore} \n"
