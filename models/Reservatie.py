@@ -8,6 +8,8 @@ class Reservatie():
     pentalty1=0
     pentalty2=0
     voertuigId = ""
+    toegewezen=False
+
 
     def __init__(self, resId, zoneId, dag,  start, duur, voertuigen, p1,p2):
         self.resId=resId
@@ -23,3 +25,14 @@ class Reservatie():
         return f"resID: {self.resId}, zoneID: {self.zoneId}, dag: {self.dag}, start: {self.start}, duur: {self.duur}" \
                f", voertuigen: {self.voertuigen}, penalty1: {self.pentalty1}, penalty2: {self.pentalty2}"
 
+    def isToegewezen(self):
+        return self.toegewezen
+
+    def getp1(self):
+        return self.penalty1
+
+    def getp2(self):
+        return self.penalty2
+
+    def getToegewezenVoertuig(self):
+        return self.toegewezenVoertuig
