@@ -24,9 +24,7 @@ class Main():
         args = parser.parse_args()
         self.ifilepath = args.i
         self.ofilepath = args.o
-
-    def help(self):
-        return "python3 main.py -i data/toy1.csv -o data/output.csv"
+        print("python3 main.py -i data/toy1.csv -o data/outputcsv")
 
     def main(self):
         self.parsearguments()
