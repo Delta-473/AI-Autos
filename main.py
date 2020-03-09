@@ -25,6 +25,9 @@ class Main():
         self.ifilepath = args.i
         self.ofilepath = args.o
 
+    def help(self):
+        return "python3 main.py -i data/toy1.csv -o data/outputcsv"
+
     def main(self):
         self.parsearguments()
 
@@ -35,7 +38,7 @@ class Main():
 
         output = Output(self.ofilepath)
 
-        output.schrijven(self.penaltyscore, reservaties, voertuigen)
+        output.schrijven(self.penaltyscore, self.reservaties, self.voertuigen)
 
 
 Main().main()
