@@ -26,7 +26,7 @@ class Main():
         self.ofilepath = args.o
 
     def help(self):
-        return "python3 main.py -i data/toy1.csv -o data/outputcsv"
+        return "python3 main.py -i data/toy1.csv -o data/output.csv"
 
     def main(self):
         self.parsearguments()
