@@ -9,10 +9,10 @@ class Zone():
         self.neighbours = neighbours
 
     def getName(self):
-        return self.name
+        return self.zoneId
 
     def getZones(self):
-        return self.zones
+        return self.neighbours
 
     def __str__(self):
         return f"ZoneID: {self.zoneId}, neighbours: {self.neighbours}"

@@ -15,7 +15,7 @@ class Inlees():
     def lees(self, reservaties, zones, voertuigen):
         line=self.file.readline()
 
-        #Reversaties inlezen
+        #Reservaties inlezen
         print("contens of line",line)
         line=line.split(': ')
         aantalRequests = int(line[1])

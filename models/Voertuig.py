@@ -1,6 +1,5 @@
 from models import data
 
-
 class Voertuig():
     id=""
     zoneId=""
