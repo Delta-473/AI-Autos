@@ -1,7 +1,10 @@
 import argparse
+import time
+import random
 
 from inlees import Inlees
 from output import Output
+from zoekalgoritme import zoekalgoritme
 
 
 class Main():
@@ -30,8 +33,8 @@ class Main():
         args = parser.parse_args()
         self.ifilepath = args.input_file
         self.ofilepath = args.solution_file
-        self.time = args.solution_file  #ToDo: not implemented
-        self.seed = args.random_seed    #ToDo: not implemented
+        self.time = args.time_limit
+        self.seed = args.random_seed
         self.threads = args.num_threads #ToDo: not implemented
 
 
@@ -39,10 +42,14 @@ class Main():
     def main(self):
         self.parsearguments()
 
+        random.seed(self.seed)
+        stoptijd = time.time() + float(self.time)
 
         inlees = Inlees(self.ifilepath)
         inlees.lees(self.reservaties, self.zones, self.voertuigen)
 
+        zoek = zoekalgoritme(self.reservaties, self.voertuigen, self.zones)
+        self.penaltyscore = zoek.zoek(stoptijd, self.reservaties, self.voertuigen)
 
         output = Output(self.ofilepath)
 

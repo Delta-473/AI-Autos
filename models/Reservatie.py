@@ -50,10 +50,10 @@ class Reservatie():
         return self.toegewezen
 
     def getp1(self):
-        return self.penalty1
+        return self.pentalty1
 
     def getp2(self):
-        return self.penalty2
+        return self.pentalty2
 
     def getToegewezenVoertuig(self):
         return self.toegewezenVoertuig
