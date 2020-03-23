@@ -48,9 +48,12 @@ class Main():
         inlees = Inlees(self.ifilepath)
         inlees.lees(self.reservaties, self.zones, self.voertuigen)
 
-        zoek = zoekalgoritme(self.reservaties, self.voertuigen, self.zones)
-        self.penaltyscore = zoek.zoek(stoptijd, self.reservaties, self.voertuigen)
-
+        while(True):
+            zoek = zoekalgoritme(self.reservaties, self.voertuigen, self.zones)
+            self.penaltyscore = zoek.zoek(stoptijd, self.reservaties, self.voertuigen)
+            if(stoptijd < nu ):
+                break
+        
         output = Output(self.ofilepath)
 
         output.schrijven(self.penaltyscore, self.reservaties, self.voertuigen)
