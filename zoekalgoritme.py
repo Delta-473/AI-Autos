@@ -17,7 +17,7 @@ class zoekalgoritme():
         self.aantal_zones = len(zones)
 
         for res in reservaties:
-            for i in (0, len(res.getVoertuigen))
+            for i in (0, len(res.getVoertuigen)):
                 if(not(res.checkVoertuigToegewezen(i))):#nog niet toegewezen
                     res.setVoertuigToegewezen(i)        #zelf toewijzen
                     resZone=res.getZone()

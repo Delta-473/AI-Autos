@@ -51,8 +51,6 @@ class Main():
         zoek = zoekalgoritme(self.reservaties, self.voertuigen, self.zones)
         self.penaltyscore = zoek.zoek(stoptijd, self.reservaties, self.voertuigen)
 
-
-
         output = Output(self.ofilepath)
 
         output.schrijven(self.penaltyscore, self.reservaties, self.voertuigen)

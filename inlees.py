@@ -15,7 +15,7 @@ class Inlees():
     def lees(self, reservaties, zones, voertuigen):
         line=self.file.readline()
 
-        #Reversaties inlezen
+        #Reservaties inlezen
         print("contens of line",line)
         line=line.split(': ')
         aantalRequests = int(line[1])
@@ -30,8 +30,9 @@ class Inlees():
             start=int(line[3])
             duur=int(line[4])
             carsLine=line[5].split(",")
+            cars = [];
             for car in carsLine:
-                cars.append(c)
+                cars.append(car)
             penalty1=line[6]
             penalty2=line[7]
 
