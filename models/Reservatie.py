@@ -58,10 +58,10 @@ class Reservatie():
         return self.duur
 
     def getP1(self):
-        return self.p1
+        return self.pentalty1
 
     def getP2(self):
-        return self.p2
+        return self.pentalty2
 
     def __str__(self):
         return f"resID: {self.resId}, zoneID: {self.zoneId}, dag: {self.dag}, start: {self.start}, duur: {self.duur}" \
@@ -77,4 +77,4 @@ class Reservatie():
         return self.pentalty2
 
     def getToegewezenVoertuig(self):
-        return self.toegewezenVoertuig
+        return self.voertuigId
