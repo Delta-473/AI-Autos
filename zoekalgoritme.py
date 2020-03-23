@@ -11,6 +11,37 @@ class zoekalgoritme():
     temp_voertuig_zone = []
     kost = 0
 
+    def init_oplossing(self, reservaties, voertuigen, zones):
+        self.aantal_reservaties = len(reservaties)
+        self.aantal_voertuigen = len(voertuigen)
+        self.aantal_zones = len(zones)
+        i = 0
+        for voertuig in voertuigen:
+            voertuig.zoneId = f"z{random.randint(0, self.aantal_zones)}"
+
+        for res in reservaties:
+            voertuigenVanZone=res.getVoertuig()
+            for voertuig in voertuigenVanZone:
+
+                if (voertuigVrij(voertuig,reservaties)):
+
+
+        #while i < self.aantal_voertuigen:
+        self.voertuig_zone = voertuigen
+        self.temp_voertuig_zone = self.voertuig_zone
+        self.kost = self.bereken_kost(reservaties, self.voertuig_zone)
+
+    def voertuigVrij(voertuig,reservaties):
+        for res in reservaties:
+            for i in (0, len(res.getVoertuigen))
+                if(not(res.checkVoertuigToegewezen(i))):#nog niet toegewezen
+                    res.setVoertuigToegewezen(i)        #zelf toewijzen
+
+            #check is res is nu volledig compleet
+
+
+
+
     def __init__(self, reservaties, voertuigen, zones):
         self.aantal_reservaties = len(reservaties)
         self.aantal_voertuigen = len(voertuigen)
