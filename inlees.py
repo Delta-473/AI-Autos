@@ -29,7 +29,9 @@ class Inlees():
             dag=int(line[2])
             start=int(line[3])
             duur=int(line[4])
-            cars=line[5]
+            carsLine=line[5].split(",")
+            for car in carsLine:
+                cars.append(c)
             penalty1=line[6]
             penalty2=line[7]
 
