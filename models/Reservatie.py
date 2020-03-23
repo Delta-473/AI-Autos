@@ -1,5 +1,5 @@
-def NIETTOEGEWEZEN False
-def TOEGEWEZEN True
+#def NIETTOEGEWEZEN False
+#def TOEGEWEZEN True
 class Reservatie():
     resId=""
     zoneId=""
@@ -22,7 +22,7 @@ class Reservatie():
         self.duur=duur
         self.voertuigen=voertuigen
         for x in range (len(self.voertuigen)):
-            voertuigenToegewezenVlag.append(NIETTOEGEWEZEN)
+            voertuigenToegewezenVlag.append(False)#NIETTOEGEWEZEN)
 
         self.pentalty1=p1
         self.pentalty2=p2
