@@ -5,6 +5,9 @@ class Voertuig():
     id=""
     zoneId=""
 
+    def setZoneID(self,zone):
+        self.zoneID=zone
+
     def __init__(self,id):
         self.id=id
         #print("voertuig made",self.id)
