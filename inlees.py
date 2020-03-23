@@ -15,7 +15,7 @@ class Inlees():
     def lees(self, reservaties, zones, voertuigen):
         line=self.file.readline()
 
-        #Reservaties inlezen
+        #Reversaties inlezen
         print("contens of line",line)
         line=line.split(': ')
         aantalRequests = int(line[1])
@@ -44,16 +44,10 @@ class Inlees():
 
         for j in range(aantalZones):
             line=self.file.readline()
-            #print(line)
             line=line.split(';')
-
-            #print(line[0])
-            #print(line[1])
             eigenZone=line[0]
             aanliggendeZone=line[1]
-
             zone=Zone(eigenZone,aanliggendeZone)
-            #print(zone)
             zones.append(zone)
 
         #Voertuigen inlezen
@@ -63,9 +57,7 @@ class Inlees():
 
         for k in range(aantalCars):
             line=self.file.readline()
-            #print(line)
             voertuig=line.rstrip('\n')
-
             car=Voertuig(voertuig)
             voertuigen.append(car)
 
