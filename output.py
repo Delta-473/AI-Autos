@@ -23,7 +23,7 @@ class Output():
         self.buffer += "+Assigned requests\n"
         for reservatie in reservaties:
             if reservatie.isToegewezen():
-                self.buffer += f"{reservatie.resID};{reservatie.voertuigId}\n"
+                self.buffer += f"{reservatie.resID};{reservatie.getToegewezenVoertuig()}\n"
 
         #Unassigned requests
         self.buffer += "+Unassigned requests\n"
