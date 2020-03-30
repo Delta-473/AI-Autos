@@ -56,11 +56,11 @@ class zoekalgoritme():
 
             teller += 1
 
-    def checkVoertuigToegewezen(self, voertuig):
+    def checkVoertuigToegewezen(self, voertuig): #geeft ZoneID string terug van een gegeven voertuig is leeg indien het niet is toegewezen
         zoneID = voertuig.getZone()
         return zoneID
 
-    def returnZoneFromZoneId(self, zones, zone):
+    def returnZoneFromZoneId(self, zones, zone):#geeft het Zone object terug van een gegeven string
         for z in zones:
             if z.getZoneID() == zone:
                 return z
@@ -108,8 +108,7 @@ class zoekalgoritme():
             self.reservaties_toewijzen(reservaties)
 
             # wijzig random voertuig toe aan random zone
-            self.temp_voertuig_zone[
-                random.randint(0, self.aantal_voertuigen - 1)].zoneID = f"z{random.randint(0, self.aantal_zones - 1)}"
+            self.temp_voertuig_zone[random.randint(0, self.aantal_voertuigen - 1)].zoneID = f"z{random.randint(0, self.aantal_zones - 1)}"
 
             # bereken kost
             nieuwe_kost = self.bereken_kost(reservaties, self.temp_voertuig_zone)
