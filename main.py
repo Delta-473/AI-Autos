@@ -22,7 +22,7 @@ class Main():
 
     def __init__(self):
         pass
-
+    # parse argument voor gebruik in program. inputfile, output, time, rand_seed, threads
     def parsearguments(self):
         parser = argparse.ArgumentParser()
         parser.add_argument("input_file", help="Geef pad naar de input file")
@@ -36,7 +36,6 @@ class Main():
         self.time = args.time_limit
         self.seed = args.random_seed
         self.threads = args.num_threads #ToDo: not implemented
-
 
 
     def main(self):

@@ -3,14 +3,13 @@ from models.Zone import Zone
 from models.Voertuig import Voertuig
 
 class Inlees():
-    file=None
-    location=""
 
     def __init__(self, location):
         self.location=location
         self.file=open((self.location),"r+")
-
-
+        self.cars = []
+        self.res = []
+        self.zones = []
 
     def lees(self, reservaties, zones, voertuigen):
         line=self.file.readline()
@@ -30,8 +29,8 @@ class Inlees():
             start=int(line[3])
             duur=int(line[4])
             carsLine=line[5].split(",")
-            cars[]
-            for car in carsLine:
+            cars=[]
+            for c in carsLine:
                 cars.append(c)
             penalty1=line[6]
             penalty2=line[7]
@@ -39,6 +38,7 @@ class Inlees():
             res=Reservatie(request,zone,dag,start,duur,cars,penalty1,penalty2)
             print(res)
             reservaties.append(res)
+            self.res.append(res)
 
         # Zones inlezen
         line=self.file.readline()
@@ -49,12 +49,14 @@ class Inlees():
             line=self.file.readline()
             line=line.split(';')
             eigenZone=line[0]
-            zoneBuurLine=line[1].spleit(',')
-            zonebuur[]
+            zoneBuurLine=line[1].split(',')
+            zoneBuur=[]
             for buur in zoneBuurLine:
                 zoneBuur.append(buur)
             zone=Zone(eigenZone,zoneBuur)
             zones.append(zone)
+            self.zones.append(zones)
+
 
         #Voertuigen inlezen
         line=self.file.readline()
@@ -66,6 +68,7 @@ class Inlees():
             voertuig=line.rstrip('\n')
             car=Voertuig(voertuig)
             voertuigen.append(car)
+            self.cars.append(voertuig)
 
         line=self.file.readline()
         line=line.split(': ')
