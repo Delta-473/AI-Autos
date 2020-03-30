@@ -7,7 +7,7 @@ class Reservatie():
     start=0
     duur=0
     voertuigen=""
-    voertuigenToegewezenVlag
+    voertuigenToegewezenVlag[]
     pentalty1=0
     pentalty2=0
     voertuigId = ""
@@ -39,6 +39,9 @@ class Reservatie():
     def checkVoertuigToegewezen(self,index):
         return voertuigenToegewezenVlag[index]
 
+    def getVoertuigFlag():
+        return self.voertuigenToegewezenVlag
+
     def getVoertuigFlag(self):
         return self.voertuigenToegewezenVlag
 
@@ -47,8 +50,10 @@ class Reservatie():
         return self.voertuigen
 
     def selfCheck(self):
-        for vlag in self.voertuigenToegewezenVlag:
-            if (vlag==False):
+        for index in self.voertuigenToegewezenVlag:
+            if (index==False):
+                voertuignaam=voertuigen[index]
+
                 self.toegewezen=False
                 return False
         self.toegewezen=True

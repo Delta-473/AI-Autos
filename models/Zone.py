@@ -2,7 +2,7 @@
 
 class Zone():
     zoneId=""
-    neighbours=""
+    neighbours[] #strings van buren zoneId
 
     def __init__(self, zoneId, neighbours):
         self.zoneId= zoneId
@@ -15,4 +15,17 @@ class Zone():
         return self.zones
 
     def __str__(self):
-        return f"ZoneID: {self.zoneId}, neighbours: {self.neighbours}"
+        string=""
+        for buur in neighbours:
+            string.append(buur)
+            string.append(',')
+        return f"ZoneID: {self.zoneId}, neighbours: {string}"
+
+    def getZoneId(self):
+        return self.zoneID
+
+    def isBuur(self, buur):
+        for b in neighbours:
+            if (buur == b):
+                return True
+        return False

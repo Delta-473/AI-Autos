@@ -30,6 +30,7 @@ class Inlees():
             start=int(line[3])
             duur=int(line[4])
             carsLine=line[5].split(",")
+            cars[]
             for car in carsLine:
                 cars.append(c)
             penalty1=line[6]
@@ -48,8 +49,11 @@ class Inlees():
             line=self.file.readline()
             line=line.split(';')
             eigenZone=line[0]
-            aanliggendeZone=line[1]
-            zone=Zone(eigenZone,aanliggendeZone)
+            zoneBuurLine=line[1].spleit(',')
+            zonebuur[]
+            for buur in zoneBuurLine:
+                zoneBuur.append(buur)
+            zone=Zone(eigenZone,zoneBuur)
             zones.append(zone)
 
         #Voertuigen inlezen
