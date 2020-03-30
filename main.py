@@ -48,7 +48,7 @@ class Main():
         inlees.lees(self.reservaties, self.zones, self.voertuigen)
 
         zoek = zoekalgoritme(self.reservaties, self.voertuigen, self.zones)
-        self.penaltyscore = zoek.zoek(stoptijd, self.reservaties, self.voertuigen)
+        # self.penaltyscore = zoek.zoek(stoptijd, self.reservaties, self.voertuigen)
 
         output = Output(self.ofilepath)
 
