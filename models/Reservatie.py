@@ -42,9 +42,6 @@ class Reservatie():
     def getVoertuigFlag(self):
         return self.voertuigenToegewezenVlag
 
-    def getVoertuigFlag(self):
-        return self.voertuigenToegewezenVlag
-
     def getVoertuigen(self):
         return self.voertuigen
 
