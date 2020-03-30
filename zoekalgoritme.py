@@ -14,7 +14,7 @@ class zoekalgoritme():
     def init_oplossing(self, reservaties, voertuigen, zones):
 
         for res in reservaties:
-            for index in (0, len(res.getVoertuigen())):
+            for index in (0, len(res.getVoertuigen())-1):
                 voertuig = self.returnVoertuigFromIndex(voertuigen, res,index)  # auto object vinden met behulp van index
                 zoneID = self.checkVoertuigToegewezen(voertuig)
                 if not (zoneID):  # controleert of er al iet in string zit
