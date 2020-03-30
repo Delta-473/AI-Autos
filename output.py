@@ -23,13 +23,13 @@ class Output():
         self.buffer += "+Assigned requests\n"
         for reservatie in reservaties:
             if reservatie.voertuigId != "":
-                self.buffer += f"{reservatie.resId};{reservatie.voertuigId}\n"
+                self.buffer += f"{reservatie.resID};{reservatie.voertuigId}\n"
 
         #Unassigned requests
         self.buffer += "+Unassigned requests\n"
         for reservatie in reservaties:
             if reservatie.voertuigId == "":
-                self.buffer += f"{reservatie.resId}\n"
+                self.buffer += f"{reservatie.resID}\n"
 
         self.file.write(self.buffer)
         self.file.close()
