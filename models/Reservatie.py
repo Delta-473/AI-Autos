@@ -33,7 +33,7 @@ class Reservatie():
         return self.voertuigen
 
     def setReservatieToegewezen(self, bool):
-        return self.toegewezen
+        self.toegewezen=bool
 
     def getResID(self):
         return self.resID

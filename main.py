@@ -50,7 +50,8 @@ class Main():
 
         zoek = zoekalgoritme(self.reservaties, self.voertuigen, self.zones)
         # self.penaltyscore = zoek.zoek(stoptijd, self.reservaties, self.voertuigen)
-        
+
+        #self.penaltyscore = zoek.zoekRubenVersie(stoptijd, self.reservaties, self.voertuigen, self.zones)
         self.penaltyscore = zoek.bereken_kost(self.reservaties, self.voertuigen)
 
         output = Output(self.ofilepath)

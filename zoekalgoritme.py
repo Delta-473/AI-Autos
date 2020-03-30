@@ -19,10 +19,6 @@ class zoekalgoritme():
         for auto in voertuigen:
             auto.setZoneID(zones[random.randint(0, self.aantal_zones - 1)].getZoneID())
 
-
-
-
-
     def init_oplossing(self, reservaties, voertuigen, zones):
 
         for res in reservaties:
@@ -143,8 +139,62 @@ class zoekalgoritme():
                         reservatie.voertuigId = voertuig.id
                         reservatie.toegewezen = True
 
-    def zoekRubenVersie(self, tijd, reservaties, voertuigen):
+#####################################################################################################################
+
+    def zoekRubenVersie(self, tijd, reservaties, voertuigen, zones):
         while time.time() < tijd:
+            save_reservaties = copy.deepcopy(reservaties)
+            save_voertuigen = copy.deepcopy(voertuigen)
+            save_kost = self.bereken_kost(reservaties, voertuigen)
+
+            allesAutosToegewezen = False
+            while not allesAutosToegewezen:
+                if random.randint(0,1) == 1:
+                    #eerst een reservatie maken
+                    res = reservaties[random.randint(0, self.aantal_reservaties - 1)]
+                    if not res.isToegewezen():
+                        autos=res.getVoertuigen()
+                        len_autos = len(autos)
+                        autoString = autos[random.randint(0, len_autos - 1)]
+                        voertuig = self.returnVoertuigFromString(voertuigen, autoString)
+                        if voertuig.kanWordenToegevoegdReservatie(res.getDag(), res.getStart(), res.getStart() + res.getDuur(), res.getResID()):
+                            voertuig.AddReservatie(res.getDag(), res.getStart(), res.getStart() + res.getDuur(),res.getResID())
+                            res.setToegewezenVoertuig(autoString)
+                            res.setReservatieToegewezen(True)
+                            voertuig.setZoneID(res.getZone())
+
+
+                else:
+                    #buren op check
+                    for res in reservaties:
+                        if not res.isToegewezen():
+                            for autoString in res.getVoertuigen():
+                                voertuig = self.returnVoertuigFromString(voertuigen, autoString)
+                                if voertuig.getZone() == res.getZone():
+                                    if voertuig.kanWordenToegevoegdReservatie(res.getDag(), res.getStart(), res.getStart() + res.getDuur(), res.getResID()):
+                                        voertuig.AddReservatie(res.getDag(), res.getStart(), res.getStart() + res.getDuur(), res.getResID())
+                                        res.setToegewezenVoertuig(autoString)
+                                        res.setReservatieToegewezen(True)
+
+                for auto in voertuigen:
+                    if auto.getZone() == "":
+                        allesAutosToegewezen = False
+                        break
+                    allesAutosToegewezen = True
+
+            niewe_kost = self.bereken_kost(reservaties, voertuigen)
+
+            if niewe_kost < save_kost:
+                save_kost=niewe_kost
+                save_reservaties = copy.deepcopy(reservaties)
+                save_voertuigen = copy.deepcopy(voertuigen)
+            else:
+                pass # deze weggooien en op nieuw berekenen
+
+        return save_kost
+
+    #####################################################################################################################
+
 
 
 
