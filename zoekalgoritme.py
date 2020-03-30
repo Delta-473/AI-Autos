@@ -13,7 +13,7 @@ class zoekalgoritme():
 
     save_voertuig_zone = copy.deepcopy(voertuig_zone)
     save_temp_voertuig_zone = copy.deepcopy(temp_voertuig_zone)
-    kost = 0
+    save_kost = 0
 
     def nieuwe_init_oplossing(self, reservaties, voertuigen, zones):
         for auto in voertuigen:
@@ -145,7 +145,7 @@ class zoekalgoritme():
 
     def zoekRubenVersie(self, tijd, reservaties, voertuigen):
         while time.time() < tijd:
-            pass
+
 
 
     def zoek(self, tijd, reservaties, voertuigen):
