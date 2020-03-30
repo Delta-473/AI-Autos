@@ -4,6 +4,7 @@ from models.Voertuig import Voertuig
 
 class Inlees():
 
+
     def __init__(self, location):
         self.location=location
         self.file=open((self.location),"r+")

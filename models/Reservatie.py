@@ -51,7 +51,7 @@ class Reservatie():
     def setReservatieToegewezen(self, bool):
         return self.toegewezen
 
-    def getresId(self):
+    def getResId(self):
         return self.resId
 
     def getZone(self):

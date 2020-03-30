@@ -39,3 +39,20 @@ class Voertuig():
 
     def AddReservatie(self, dag, start, einde, resID):
         self.voertuig_bezettingen.append(VoertuigBezet(dag, start, einde, resID))
+
+    def kanWordenToegevoegdReservatie(self,dag2, start2, einde2, resId):
+        lukt=True
+        for bezetting in self.voertuig_bezettingen:
+            if bezetting.getResID() == resId:
+                return True #deze reservatie zit er al in
+            if bezetting.getDag() != dag2:
+                continue    #als we 2 verschillende dagen aan het vergelijken zijn dan volgende
+            if (start2 < bezetting.getStart()) and (einde2 < bezetting.getStart()):  # nieuwe bezetting(2) kan voor de oude(huidige)
+                continue
+            if bezetting.getEinde() < start2:  # nieuwe bezetting (2) kan na de oude bezetting( huidige)
+                continue
+            else:
+                lukt=False
+        return lukt
+
+
