@@ -1,3 +1,4 @@
+import copy;
 from models.Reservatie import Reservatie
 from models.Zone import Zone
 from models.Voertuig import Voertuig
@@ -11,6 +12,10 @@ class Inlees():
         self.cars = []
         self.res = []
         self.zones = []
+
+        self.save_cars = copy.deepcopy(self.cars)
+        self.save_res = copy.deepcopy(self.res)
+        self.save_zones = copy.deepcopy(self.zones)
 
     def lees(self, reservaties, zones, voertuigen):
         line=self.file.readline()
