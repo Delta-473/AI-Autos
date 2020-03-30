@@ -1,8 +1,8 @@
 #def NIETTOEGEWEZEN False
 #def TOEGEWEZEN True
 class Reservatie():
-    resId=""
-    zoneId=""
+    resID=""
+    zoneID=""
     dag=0
     start=0
     duur=0
@@ -15,8 +15,8 @@ class Reservatie():
 
 
     def __init__(self, resId, zoneId, dag,  start, duur, voertuigen, p1,p2):
-        self.resId=resId
-        self.zoneId=zoneId
+        self.resID=resId
+        self.zoneID=zoneId
         self.dag=dag
         self.start=start
         self.duur=duur
@@ -48,11 +48,11 @@ class Reservatie():
     def setReservatieToegewezen(self, bool):
         return self.toegewezen
 
-    def getResId(self):
-        return self.resId
+    def getResID(self):
+        return self.resID
 
     def getZone(self):
-        return self.zoneId
+        return self.zoneID
 
     def getDag(self):
         return self.dag
@@ -70,7 +70,7 @@ class Reservatie():
         return self.pentalty2
 
     def __str__(self):
-        return f"resID: {self.resId}, zoneID: {self.zoneId}, dag: {self.dag}, start: {self.start}, duur: {self.duur}" \
+        return f"resID: {self.resID}, zoneID: {self.zoneID}, dag: {self.dag}, start: {self.start}, duur: {self.duur}" \
                f", voertuigen: {self.voertuigen}, penalty1: {self.pentalty1}, penalty2: {self.pentalty2}"
 
     def isToegewezen(self):

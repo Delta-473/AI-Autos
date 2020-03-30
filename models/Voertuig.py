@@ -4,22 +4,22 @@ import numpy as np
 from models.VoertuigBezet import VoertuigBezet
 
 class Voertuig():
-    id=""
+    ID= ""
     zoneID= ""
     voertuig_bezettingen = []
 
     def setZoneID(self,zone):
         self.zoneID=zone
 
-    def __init__(self,id):
-        self.id=id
+    def __init__(self,ID):
+        self.ID=ID
         #print("voertuig made",self.id)
 
     def getID(self):
-        return self.id
+        return self.ID
 
     def __str__(self):
-        return f"Voertuig ID: {self.id} en zone ID: {self.zoneID}"
+        return f"Voertuig ID: {self.ID} en zone ID: {self.zoneID}"
 
     def getZone(self):
         return self.zoneID
@@ -39,10 +39,10 @@ class Voertuig():
     def AddReservatie(self, dag, start, einde, resID):
         self.voertuig_bezettingen.append(VoertuigBezet(dag, start, einde, resID))
 
-    def kanWordenToegevoegdReservatie(self,dag2, start2, einde2, resId):
+    def kanWordenToegevoegdReservatie(self,dag2, start2, einde2, resID):
         lukt=True
         for bezetting in self.voertuig_bezettingen:
-            if bezetting.getResID() == resId:
+            if bezetting.getResID() == resID:
                 return True #deze reservatie zit er al in
             if bezetting.getDag() != dag2:
                 continue    #als we 2 verschillende dagen aan het vergelijken zijn dan volgende
