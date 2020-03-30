@@ -5,8 +5,11 @@ class VoertuigBezet():
     einde = ""
     resID = ""
 
-    def __init__(self):
-        pass
+    def __init__(self, dag, start, einde, resID):
+        self.dag = dag
+        self.start = start
+        self.einde = einde
+        self.resID = resID
     
     def __str__(self):
         return f"Dag: {self.dag}, Start: {self.start}, Einde: {self.einde}, Reservatie ID: {self.resID}"
