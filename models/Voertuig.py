@@ -3,7 +3,6 @@ import numpy as np
 
 from models.VoertuigBezet import VoertuigBezet
 
-
 class Voertuig():
     id=""
     zoneId=""

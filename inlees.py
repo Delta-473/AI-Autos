@@ -31,7 +31,7 @@ class Inlees():
             duur=int(line[4])
             carsLine=line[5].split(",")
             cars=[]
-            for c in carsLine:
+            for c in carsLine:      # array van cars
                 cars.append(c)
             penalty1=line[6]
             penalty2=line[7]
