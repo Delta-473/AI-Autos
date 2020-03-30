@@ -37,6 +37,7 @@ class zoekalgoritme():
         #controleert of reservatie volledig is (true als alle auto's zijn toegewezen aan zichzelf of aan buren)
         #false als een auto niet toegewezen is aan reservatie of zijn buur
         teller=0
+        voorlopigCompleet=True
         for autoTrueOrFalse in reservatie.getVoertuigFlag(): #return bit array met indicatie of auto is toegewezen
             if (autoTrueOrFalse):
                 #auto is aan deze zone TOEGEWEZEN
@@ -46,7 +47,13 @@ class zoekalgoritme():
                 voertuig = returnVoertuigFromIndex(voertuigen,reservatie, teller)
                 zoneId=voertuig.getZone()
                 zone=returnZoneFromZoneId(zones,zoneId)
-                zone.isBuur(reservatie.getZone())
+                if (zone.isBuur(reservatie.getZone())):
+                    #auto is aan buur toegewezen dus reservatie is voorlopig nog Compleet
+                    continue
+                else:
+                    #niet bij de buur en ook niet bij zichzelf
+                    voorlopigCompleet=False
+                    reservatie.setReservatieToegewezen
 
             teller+=1
 
