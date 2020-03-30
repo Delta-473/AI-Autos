@@ -1,5 +1,3 @@
-
-
 class Zone():
     zoneID=""
     neighbours=[] #strings van buren zoneID

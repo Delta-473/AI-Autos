@@ -1,5 +1,6 @@
 import time
 import random
+import copy
 
 from models.Reservatie import Reservatie
 from models.Zone import Zone
@@ -9,6 +10,9 @@ from models.Voertuig import Voertuig
 class zoekalgoritme():
     voertuig_zone = []
     temp_voertuig_zone = []
+
+    save_voertuig_zone = copy.deepcopy(voertuig_zone)
+    save_temp_voertuig_zone = copy.deepcopy(temp_voertuig_zone)
     kost = 0
 
     def init_oplossing(self, reservaties, voertuigen, zones):
@@ -108,8 +112,7 @@ class zoekalgoritme():
             self.reservaties_toewijzen(reservaties)
 
             # wijzig random voertuig toe aan random zone
-            self.temp_voertuig_zone[
-                random.randint(0, self.aantal_voertuigen - 1)].zoneID = f"z{random.randint(0, self.aantal_zones - 1)}"
+            #self.temp_voertuig_zone[random.randint(0, self.aantal_voertuigen - 1)].zoneID = f"z{random.randint(0, self.aantal_zones - 1)}"
 
             # bereken kost
             nieuwe_kost = self.bereken_kost(reservaties, self.temp_voertuig_zone)

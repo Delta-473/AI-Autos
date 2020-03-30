@@ -1,6 +1,7 @@
 import argparse
 import time
 import random
+import copy
 
 from inlees import Inlees
 from output import Output
@@ -49,9 +50,9 @@ class Main():
 
         zoek = zoekalgoritme(self.reservaties, self.voertuigen, self.zones)
         # self.penaltyscore = zoek.zoek(stoptijd, self.reservaties, self.voertuigen)
-
         output = Output(self.ofilepath)
 
+        self.penaltyscore = 24
         output.schrijven(self.penaltyscore, self.reservaties, self.voertuigen)
 
 
