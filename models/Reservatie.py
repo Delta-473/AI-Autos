@@ -14,9 +14,9 @@ class Reservatie():
     toegewezen=False
 
 
-    def __init__(self, resId, zoneId, dag,  start, duur, voertuigen, p1,p2):
+    def __init__(self, resId, zoneID, dag,  start, duur, voertuigen, p1,p2):
         self.resID=resId
-        self.zoneID=zoneId
+        self.zoneID=zoneID
         self.dag=dag
         self.start=start
         self.duur=duur

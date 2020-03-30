@@ -2,10 +2,10 @@
 
 class Zone():
     zoneID=""
-    neighbours=[] #strings van buren zoneId
+    neighbours=[] #strings van buren zoneID
 
-    def __init__(self, zoneId, neighbours):
-        self.zoneId= zoneId
+    def __init__(self, zoneID, neighbours):
+        self.zoneID= zoneID
         self.neighbours = neighbours
 
     def getName(self):
@@ -19,7 +19,7 @@ class Zone():
         for buur in self.neighbours:
             string.append(buur)
             string.append(',')
-        return f"ZoneID: {self.zoneId}, neighbours: {string}"
+        return f"ZoneID: {self.zoneID}, neighbours: {string}"
 
     def getZoneID(self):
         return self.zoneID

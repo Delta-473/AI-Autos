@@ -44,8 +44,8 @@ class zoekalgoritme():
             else:
                 # auto is niet aan deze reservatie toegewezen, maar misschien wel aan een buur
                 voertuig = self.returnVoertuigFromIndex(voertuigen, reservatie, teller)
-                zoneId = voertuig.getZone()
-                zone = self.returnZoneFromZoneId(zones, zoneId)
+                zoneID = voertuig.getZone()
+                zone = self.returnZoneFromZoneId(zones, zoneID)
                 if zone.isBuur(reservatie.getZone()):
                     # auto is aan buur toegewezen dus reservatie is voorlopig nog Compleet
                     continue
@@ -57,8 +57,8 @@ class zoekalgoritme():
             teller += 1
 
     def checkVoertuigToegewezen(self, voertuig):
-        zoneId = voertuig.getZone()
-        return zoneId
+        zoneID = voertuig.getZone()
+        return zoneID
 
     def returnZoneFromZoneId(self, zones, zone):
         for z in zones:
@@ -84,7 +84,7 @@ class zoekalgoritme():
 
         '''i = 0
         for voertuig in voertuigen:
-            voertuig.zoneId = f"z{random.randint(0, self.aantal_zones)}"
+            voertuig.zoneID = f"z{random.randint(0, self.aantal_zones)}"
 
         # while i < self.aantal_voertuigen:
         self.voertuig_zone = voertuigen
@@ -94,7 +94,7 @@ class zoekalgoritme():
     def reservaties_toewijzen(self, reservaties):
         for reservatie in reservaties:
             for voertuig in self.temp_voertuig_zone:
-                if reservatie.zoneId == voertuig.zoneId:
+                if reservatie.zoneID == voertuig.zoneID:
                     if voertuig.id in reservatie.voertuigen:
                         reservatie.voertuigId = voertuig.id
                         reservatie.toegewezen = True
@@ -109,7 +109,7 @@ class zoekalgoritme():
 
             # wijzig random voertuig toe aan random zone
             self.temp_voertuig_zone[
-                random.randint(0, self.aantal_voertuigen - 1)].zoneId = f"z{random.randint(0, self.aantal_zones - 1)}"
+                random.randint(0, self.aantal_voertuigen - 1)].zoneID = f"z{random.randint(0, self.aantal_zones - 1)}"
 
             # bereken kost
             nieuwe_kost = self.bereken_kost(reservaties, self.temp_voertuig_zone)
@@ -127,7 +127,7 @@ class zoekalgoritme():
         for res in reservaties:
             if res.isToegewezen():
                 for voertuig in voertuigen:
-                    if not (res.zoneId == voertuig.zoneId):
+                    if not (res.zoneID == voertuig.zoneID):
                         som += int(res.getp2(), base=10)
                         break
             else:
