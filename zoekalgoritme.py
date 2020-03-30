@@ -17,20 +17,57 @@ class zoekalgoritme():
         self.aantal_zones = len(zones)
 
         for res in reservaties:
-            for i in (0, len(res.getVoertuigen)):
-                if(not(res.checkVoertuigToegewezen(i))):#nog niet toegewezen
-                    res.setVoertuigToegewezen(i)        #zelf toewijzen
+            for index in (0, len(res.getVoertuigen))
+                voertuig=returnVoertuigFromIndex(voertuigen,res,index)# auto object vinden met behulp van index
+                zoneId=checkVoertuigToegewezen(voertuig)
+                if (not(zoneId)): #controleert of er al iet isn string zit
+                    #nog niet toegewezen
+                    res.setVoertuigToegewezen(i)        #zelf toewijzen door de vlag op true te zetten
                     resZone=res.getZone()
 
-                    #tegen het voertuig zeggen dat die toegewezen is, eerst voertuig vinden
-                    voertuigTeZoeken=res.getVoertuigIndex(i)
-                    for voertuig in (voertuigen):
-                        if(voertuig.getID==voertuigTeZoeken):
-                            break
+                    #tegen het voertuig zeggen dat die toegewezen is
                     voertuig.setZoneID(resZone)
 
-            #check of zijn reservatie is nu volledig compleet is
-            res.selfCheck()
+                    #check of zijn reservatie is nu volledig compleet is
+                    reservatieCheck(res)
+                else: #voertuig is ergens anders al TOEGEWEZEN
+                    res.setVoertuigNietToegewezen(i)
+
+    def reservatieCheck(self,reservatie, voertuigen, zones):
+        #controleert of reservatie volledig is (true als alle auto's zijn toegewezen aan zichzelf of aan buren)
+        #false als een auto niet toegewezen is aan reservatie of zijn buur
+        teller=0
+        for autoTrueOrFalse in reservatie.getVoertuigFlag(): #return bit array met indicatie of auto is toegewezen
+            if (autoTrueOrFalse):
+                #auto is aan deze zone TOEGEWEZEN
+                continue
+            else:
+                #auto is niet aan deze reservatie toegewezen, maar misschien wel aan een buur
+                voertuig = returnVoertuigFromIndex(voertuigen,reservatie, teller)
+                zoneId=voertuig.getZone()
+                zone=returnZoneFromZoneId(zones,zoneId)
+                zone.isBuur(reservatie.getZone())
+
+            teller+=1
+
+    def checkVoertuigToegewezen(self,voertuig):
+        zoneId=voertuig.getZone()
+        return zoneId
+
+    def returnZoneFromZoneId(self,zones, zone):
+        for z in zones:
+            if (z.getZoneId == zone):
+                return z
+        print("er is iets kapot ik heb een zone moeten zoeken met deze naam: ", str(zone)")
+
+    def returnVoertuigFromIndex(self,voertuigen,reservatie, voertuigIndex):
+        #we hebben de indexerende bit en de reservatie
+        #return ons nu het voertuig
+         voertuigTeZoeken=reservatie.getVoertuigIndex(voertuigIndex)
+         for voertuig in (voertuigen):
+             if(voertuig.getID==voertuigTeZoeken):
+                 return voertuig
+        print("er is iets kapot ik heb een voertuig moeten zoeken met deze naam: ", str(voertuigTeZoeken))
 
 
     def __init__(self, reservaties, voertuigen, zones):
