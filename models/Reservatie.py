@@ -49,15 +49,8 @@ class Reservatie():
     def getVoertuigen(self):
         return self.voertuigen
 
-    def selfCheck(self):
-        for index in self.voertuigenToegewezenVlag:
-            if (index==False):
-                voertuignaam=voertuigen[index]
-
-                self.toegewezen=False
-                return False
-        self.toegewezen=True
-        return True
+    def setReservatieToegewezen(self, bool):
+        return self.toegewezen
 
     def getresId(self):
         return self.resId
