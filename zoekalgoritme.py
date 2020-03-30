@@ -16,20 +16,20 @@ class zoekalgoritme():
         for res in reservaties:
             for index in (0, len(res.getVoertuigen())):
                 voertuig = self.returnVoertuigFromIndex(voertuigen, res,index)  # auto object vinden met behulp van index
-                zoneId = self.checkVoertuigToegewezen(voertuig)
-                if not (zoneId):  # controleert of er al iet in string zit
+                zoneID = self.checkVoertuigToegewezen(voertuig)
+                if not (zoneID):  # controleert of er al iet in string zit
                     # nog niet toegewezen
-                    if voertuig.kanWordenToegevoegdReservatie(res.getDag(), res.getStart(), res.getStart() + res.getDuur()):
+                    if voertuig.kanWordenToegevoegdReservatie(res.getDag(), res.getStart(), res.getStart() + res.getDuur(), res.getResID()):
 
                         res.setVoertuigToegewezen(index)  # zelf toewijzen door de vlag op true te zetten
                         resZone = res.getZone()
 
                         # tegen het voertuig zeggen dat die toegewezen is
                         voertuig.setZoneID(resZone)
-                        voertuig.AddReservatie(self, res.getDag(), res.getStart(), res.getStart() + res.getDuur(), res.getResId())
+                        voertuig.AddReservatie(res.getDag(), res.getStart(), res.getStart() + res.getDuur(), res.getResID())
 
                         # check of zijn reservatie is nu volledig compleet is
-                        self.reservatieCheck(res)
+                        self.reservatieCheck(res, voertuigen, zones)
                 else:  # voertuig is ergens anders al TOEGEWEZEN
                     res.setVoertuigNietToegewezen(index)
 
@@ -62,7 +62,7 @@ class zoekalgoritme():
 
     def returnZoneFromZoneId(self, zones, zone):
         for z in zones:
-            if z.getZoneId() == zone:
+            if z.getZoneID() == zone:
                 return z
         print("er is iets kapot ik heb een zone moeten zoeken met deze naam:", str(zone))
 
