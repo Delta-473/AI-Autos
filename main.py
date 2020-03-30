@@ -55,7 +55,6 @@ class Main():
 
         output = Output(self.ofilepath)
 
-        self.penaltyscore = 24
         output.schrijven(self.penaltyscore, self.reservaties, self.voertuigen)
 
 

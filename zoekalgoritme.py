@@ -21,6 +21,8 @@ class zoekalgoritme():
 
 
 
+
+
     def init_oplossing(self, reservaties, voertuigen, zones):
 
         for res in reservaties:
@@ -140,6 +142,11 @@ class zoekalgoritme():
                     if voertuig.id in reservatie.voertuigen:
                         reservatie.voertuigId = voertuig.id
                         reservatie.toegewezen = True
+
+    def zoekRubenVersie(self, tijd, reservaties, voertuigen):
+        while time.time() < tijd:
+            pass
+
 
     def zoek(self, tijd, reservaties, voertuigen):
 
