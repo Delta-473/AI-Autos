@@ -6,7 +6,7 @@ from models.VoertuigBezet import VoertuigBezet
 
 class Voertuig():
     id=""
-    zoneId=""
+    zoneID= ""
     voertuig_bezettingen = []
 
     def setZoneID(self,zone):
@@ -20,7 +20,7 @@ class Voertuig():
         return self.id
 
     def __str__(self):
-        return f"Voertuig ID: {self.id} en zone ID: {self.zoneId}"
+        return f"Voertuig ID: {self.id} en zone ID: {self.zoneID}"
 
     def getZone(self):
         return self.zoneID
