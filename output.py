@@ -17,7 +17,7 @@ class Output():
         #Vehicle assignments
         self.buffer += "+Vehicle assignments\n"
         for voertuig in voertuigen:
-            self.buffer += f"{voertuig.id};{voertuig.zoneId}\n"
+            self.buffer += f"{voertuig.id};{voertuig.zoneID}\n"
 
         #Assigned requests
         self.buffer += "+Assigned requests\n"
