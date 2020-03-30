@@ -15,9 +15,9 @@ class Zone():
     def __str__(self):
         string=""
         for buur in self.neighbours:
-            string.append(buur)
-            string.append(',')
-        return f"ZoneID: {self.zoneID}, neighbours: {string}"
+            string+=f"{buur}"
+            string+=','
+        return f"{self.zoneID};{string}"
 
     def getZoneID(self):
         return self.zoneID

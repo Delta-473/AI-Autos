@@ -22,13 +22,13 @@ class Output():
         #Assigned requests
         self.buffer += "+Assigned requests\n"
         for reservatie in reservaties:
-            if reservatie.voertuigId != "":
+            if reservatie.isToegewezen():
                 self.buffer += f"{reservatie.resID};{reservatie.voertuigId}\n"
 
         #Unassigned requests
         self.buffer += "+Unassigned requests\n"
         for reservatie in reservaties:
-            if reservatie.voertuigId == "":
+            if not reservatie.isToegewezen():
                 self.buffer += f"{reservatie.resID}\n"
 
         self.file.write(self.buffer)
