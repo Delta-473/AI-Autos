@@ -73,7 +73,7 @@ class zoekalgoritme():
         for voertuig in voertuigen:
             if voertuig.getID() == voertuigTeZoeken:
                 return voertuig
-            print("er is iets kapot ik heb een voertuig moeten zoeken met deze naam:",voertuigTeZoeken)
+        print("er is iets kapot ik heb een voertuig moeten zoeken met deze naam:",voertuigTeZoeken)
 
     def __init__(self, reservaties, voertuigen, zones):
         self.aantal_reservaties = len(reservaties)
