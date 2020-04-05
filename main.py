@@ -3,6 +3,7 @@ import time
 import random
 import copy
 
+
 from inlees import Inlees
 from output import Output
 from zoekalgoritme import zoekalgoritme
@@ -52,7 +53,8 @@ class Main():
         # self.penaltyscore = zoek.zoek(stoptijd, self.reservaties, self.voertuigen)
 
         #self.penaltyscore = zoek.zoekRubenVersie(stoptijd, self.reservaties, self.voertuigen, self.zones)
-        self.penaltyscore = zoek.bereken_kost(self.reservaties, self.voertuigen)
+        self.penaltyscore = zoek.zoekJeroenVersie(stoptijd, self.reservaties, self.voertuigen, self.zones)
+        #self.penaltyscore = zoek.bereken_kost(self.reservaties, self.voertuigen)
 
         output = Output(self.ofilepath)
 

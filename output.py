@@ -33,4 +33,3 @@ class Output():
 
         self.file.write(self.buffer)
         self.file.close()
-

@@ -1,6 +1,7 @@
 import time
 import random
 import copy
+import math
 
 from models.Reservatie import Reservatie
 from models.Zone import Zone
@@ -194,7 +195,112 @@ class zoekalgoritme():
         return save_kost
 
     #####################################################################################################################
+    def find3largest(self, arr, output_array):
+        arr_size = len(arr)
+        third = first = second = 0
+        fi = si = ti = ''
 
+        for i in range(0, arr_size):
+            # If current element is greater than first
+            if (arr[i] > first):
+                third = second
+                second = first
+                first = arr[i]
+                si=fi
+                fi='z'+str(i)
+
+                # If arr[i] is in between first and second then update second
+            elif (arr[i] > second):
+                third = second
+                second = arr[i]
+                si='z'+str(i)
+
+            elif (arr[i] > third):
+                third = arr[i]
+                ti='z'+str(i)
+
+        print("Three largest elements are", first, second, third)
+        print("Three largest elements are located at index", fi, si, ti)
+        output_array.append(fi)
+        output_array.append(si)
+        output_array.append(ti)
+
+    def zoekJeroenVersie(self, tijd, reservaties, voertuigen, zones):
+        resID = 0;
+        zoneArray = []
+        ResZone = [0 for x in range(len(zones))]
+        for res in reservaties:
+            for zone in zones:
+                index = int(zone.getZoneID().strip('z'))
+                if (res.zoneID == zone.zoneID):
+                    ResZone[index]+=1
+                else:
+                    ResZone[index]+=0
+
+        self.find3largest(ResZone,zoneArray)
+        #zoneArray = ["z0", "z4", "z2"]
+        for auto in voertuigen:
+            RandZone = zoneArray[math.floor(random.random() * len(zoneArray))]
+            auto.setZoneID(RandZone)
+        while time.time() < tijd:
+            save_reservaties = copy.deepcopy(reservaties)
+            save_voertuigen = copy.deepcopy(voertuigen)
+            save_kost = self.bereken_kost(reservaties, voertuigen)
+            # for auto in voertuigen:
+            #  zoneArray = ["z0", "z2", "z4"]
+            # RandZone = zoneArray[math.floor(random.random() * len(zoneArray))]
+            # auto.setZoneID(RandZone)
+            allesAutosToegewezen = False
+            while not allesAutosToegewezen:
+                res = reservaties[resID]
+                resID+1;
+                if not res.isToegewezen():
+                    autos = res.getVoertuigen()
+                    len_autos = len(autos)
+                    autoString = autos[random.randint(0, len_autos)]
+                    voertuig = self.returnVoertuigFromString(voertuigen, autoString)
+                    if voertuig.kanWordenToegevoegdReservatie(res.getDag(), res.getStart(), res.getStart() + res.getDuur(), res.getResID()):
+                        voertuig.AddReservatie(res.getDag(), res.getStart(), res.getStart() + res.getDuur(), res.getResID())
+                        res.setToegewezenVoertuig(autoString)
+                        res.setReservatieToegewezen(True)
+                        RandZone = zoneArray[math.floor(random.random() * len(zoneArray))]
+                        voertuig.setZoneID("z0")
+
+                else:
+                    # buren op check
+                    for res in reservaties:
+                        if not res.isToegewezen():
+                            for autoString in res.getVoertuigen():
+                                voertuig = self.returnVoertuigFromString(voertuigen, autoString)
+                                if voertuig.getZone() == res.getZone():
+                                    if voertuig.kanWordenToegevoegdReservatie(res.getDag(), res.getStart(), res.getStart() + res.getDuur(), res.getResID()):
+                                        voertuig.AddReservatie(res.getDag(), res.getStart(), res.getStart() + res.getDuur(), res.getResID())
+                                        res.setToegewezenVoertuig(autoString)
+                                        res.setReservatieToegewezen(True)
+
+                for auto in voertuigen:
+                    if auto.getZone() == "":
+                        allesAutosToegewezen = False
+                        break
+                    allesAutosToegewezen = True
+
+            niewe_kost = self.bereken_kost(reservaties, voertuigen)
+            if niewe_kost < save_kost:
+                save_kost = niewe_kost
+                save_reservaties = copy.deepcopy(reservaties)
+                save_voertuigen = copy.deepcopy(voertuigen)
+            else:
+                pass  # deze weggooien en op nieuw berekenen
+
+        return save_kost
+
+
+
+
+
+
+
+    ####################################################################################################################
 
 
 
@@ -207,20 +313,18 @@ class zoekalgoritme():
             self.reservaties_toewijzen(reservaties)
 
             # wijzig random voertuig toe aan random zone
-
             self.temp_voertuig_zone[random.randint(0, self.aantal_voertuigen - 1)].zoneID = f"z{random.randint(0, self.aantal_zones - 1)}"
-
 
             # bereken kost
             nieuwe_kost = self.bereken_kost(reservaties, self.temp_voertuig_zone)
 
-            if self.kost > nieuwe_kost:
+            if self.save_kost > nieuwe_kost:
                 self.voertuig_zone = self.temp_voertuig_zone
-                self.kost = nieuwe_kost
+                self.save_kost = nieuwe_kost
             else:
                 self.temp_voertuig_zone = self.voertuig_zone
 
-        return self.kost
+        return self.save_kost
 
     def bereken_kost(self, reservaties, voertuigen):
         som = 0
