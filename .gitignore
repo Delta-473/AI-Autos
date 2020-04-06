@@ -134,3 +134,4 @@ dmypy.json
 
 # zip files
 *.zip
+data/test.csv
