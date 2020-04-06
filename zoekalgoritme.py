@@ -313,7 +313,7 @@ class zoekalgoritme():
         output_array.append(ti)
 
     def zoekJeroenVersie(self, tijd, reservaties, voertuigen, zones):
-        resID = 0;
+        resID = 0
         zoneArray = []
         ResZone = [0 for x in range(len(zones))]
         for res in reservaties:
@@ -339,31 +339,21 @@ class zoekalgoritme():
             # auto.setZoneID(RandZone)
             allesAutosToegewezen = False
             while not allesAutosToegewezen:
-                res = reservaties[resID]
-                resID+1;
-                if not res.isToegewezen():
-                    autos = res.getVoertuigen()
-                    len_autos = len(autos)
-                    autoString = autos[random.randint(0, len_autos)]
-                    voertuig = self.returnVoertuigFromString(voertuigen, autoString)
-                    if voertuig.kanWordenToegevoegdReservatie(res.getDag(), res.getStart(), res.getStart() + res.getDuur(), res.getResID()):
-                        voertuig.AddReservatie(res.getDag(), res.getStart(), res.getStart() + res.getDuur(), res.getResID())
-                        res.setToegewezenVoertuig(autoString)
-                        res.setReservatieToegewezen(True)
-                        RandZone = zoneArray[math.floor(random.random() * len(zoneArray))]
-                        voertuig.setZoneID("z0")
+                if random.randint(0, 1) == 1:
+                    res = reservaties[resID]
+                    ++resID
+                    if not res.isToegewezen():
+                        autos = res.getVoertuigen()
+                        len_autos = len(autos)
+                        autoString = autos[random.randint(0, len_autos-1)]
+                        voertuig = self.returnVoertuigFromString(voertuigen, autoString)
+                        if voertuig.kanWordenToegevoegdReservatie(res.getDag(), res.getStart(), res.getStart() + res.getDuur(), res.getResID()):
+                            voertuig.AddReservatie(res.getDag(), res.getStart(), res.getStart() + res.getDuur(), res.getResID())
+                            res.setToegewezenVoertuig(autoString)
+                            res.setReservatieToegewezen(True)
+                            RandZone = zoneArray[math.floor(random.random() * len(zoneArray))]
+                            voertuig.setZoneID(res.getZone())
 
-                else:
-                    # buren op check
-                    for res in reservaties:
-                        if not res.isToegewezen():
-                            for autoString in res.getVoertuigen():
-                                voertuig = self.returnVoertuigFromString(voertuigen, autoString)
-                                if voertuig.getZone() == res.getZone():
-                                    if voertuig.kanWordenToegevoegdReservatie(res.getDag(), res.getStart(), res.getStart() + res.getDuur(), res.getResID()):
-                                        voertuig.AddReservatie(res.getDag(), res.getStart(), res.getStart() + res.getDuur(), res.getResID())
-                                        res.setToegewezenVoertuig(autoString)
-                                        res.setReservatieToegewezen(True)
 
                 for auto in voertuigen:
                     if auto.getZone() == "":
