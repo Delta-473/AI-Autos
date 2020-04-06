@@ -136,6 +136,8 @@ class zoekalgoritme():
         for res in reservaties:
             zoneID = int(res.zoneID[1:])
             naburigeZones = zones[zoneID].getZones()
+            oplossingBuur = []
+            oplossingGevondenInZone = False
             for voertuig in self.temp_voertuig_zone:
                 if res.zoneID == voertuig.zoneID:
                     if voertuig.ID in res.voertuigen:
@@ -143,15 +145,23 @@ class zoekalgoritme():
                             voertuig.AddReservatie(res.getDag(), res.getStart(), res.getStart() + res.getDuur(),res.getResID())
                             res.voertuigID = voertuig.ID
                             res.toegewezen = True
+                            oplossingGevondenInZone = True
                             break
                 else:
                     for buren in naburigeZones:
-                        if buren == voertuig.ID:
+                        if buren == voertuig.zoneID:
                             if voertuig.kanWordenToegevoegdReservatie(res.getDag(), res.getStart(),res.getStart() + res.getDuur(), res.getResID()):
-                                voertuig.AddReservatie(res.getDag(), res.getStart(), res.getStart() + res.getDuur(),res.getResID())
-                                res.voertuigID = voertuig.ID
-                                res.toegewezen = True
+                                oplossingBuur.append(res.getDag())
+                                oplossingBuur.append(res.getStart())
+                                oplossingBuur.append(res.getStart() + res.getDuur())
+                                oplossingBuur.append(res.getResID())
+                                oplossingBuur.append(voertuig.ID)
+
                                 break
+            if oplossingGevondenInZone == False and len(oplossingBuur) != 0:
+                voertuig.AddReservatie(oplossingBuur[0], oplossingBuur[1], oplossingBuur[2], oplossingBuur[3])
+                res.voertuigID = oplossingBuur[4]
+                res.toegewezen = True
 
     def zoekChristophe(self, tijd, reservaties, voertuigen, zones):
 
@@ -178,15 +188,15 @@ class zoekalgoritme():
 
 
 #####################################################################################################################
-    def zoekRuben (self, tijd, reservaties, voertuigen, zones):
+    def zoekRuben(self, tijd, reservaties, voertuigen, zones):
         kost = self.bereken_kost(reservaties, voertuigen)
 
         while time.time() < tijd:
+
             kost = self.zoekRubenRandom(reservaties, voertuigen, zones, kost)
 
-            #oneSec = time.time() + 1oneSec = time.time() + 1
-            #while time.time() < oneSec:
-            kost = self.zoekRubenHillClimbing(reservaties, voertuigen, zones, kost)
+
+            #kost = self.zoekRubenHillClimbing(reservaties, voertuigen, zones, kost)
 
         return kost
 
@@ -307,7 +317,7 @@ class zoekalgoritme():
             save_reservaties = copy.deepcopy(reservaties)
             save_voertuigen = copy.deepcopy(voertuigen)
         else:
-            # deze weggooien
+            # oude herstellen weggooien
             reservaties = save_reservaties
             voertuigen = save_voertuigen
 

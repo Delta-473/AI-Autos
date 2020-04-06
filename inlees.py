@@ -55,7 +55,7 @@ class Inlees():
             line=self.file.readline()
             line=line.split(';')
             eigenZone=line[0]
-            zoneBuurLine=line[1].split(',')
+            zoneBuurLine=line[1].rstrip('\n').split(',')
             zoneBuur=[]
             for buur in zoneBuurLine:
                 zoneBuur.append(buur)
