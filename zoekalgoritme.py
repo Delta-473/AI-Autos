@@ -147,6 +147,7 @@ class zoekalgoritme():
             kost = self.zoekRubenRandom(reservaties, voertuigen, zones, kost)
 
         return kost
+
     def zoekRubenRandom(self, reservaties, voertuigen, zones, kost):
         save_reservaties = copy.deepcopy(reservaties)
         save_voertuigen = copy.deepcopy(voertuigen)
@@ -244,6 +245,8 @@ class zoekalgoritme():
             voertuigen = save_voertuigen
 
         return save_kost
+
+    #####################################################################################################################
 
     def find3largest(self, arr, output_array):
         arr_size = len(arr)
