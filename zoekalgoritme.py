@@ -180,10 +180,15 @@ class zoekalgoritme():
 #####################################################################################################################
     def zoekRuben (self, tijd, reservaties, voertuigen, zones):
         kost = self.bereken_kost(reservaties, voertuigen)
+
         while time.time() < tijd:
+            oneSec = time.time() + 1
             kost = self.zoekRubenRandom(reservaties, voertuigen, zones, kost)
+            #while time.time() < oneSec:
+            #kost = self.zoekRubenHillClimbing(reservaties, voertuigen, zones, kost)
 
         return kost
+
     def zoekRubenRandom(self, reservaties, voertuigen, zones, kost):
         save_reservaties = copy.deepcopy(reservaties)
         save_voertuigen = copy.deepcopy(voertuigen)
@@ -191,7 +196,7 @@ class zoekalgoritme():
 
         allesAutosToegewezen = False
         while not allesAutosToegewezen:
-            if random.randint(0,1) == 1:
+            if random.randint(0,5) <= 1:
                 #eerst een reservatie maken
                 res = reservaties[random.randint(0, self.aantal_reservaties - 1)]
                 if not res.isToegewezen():
@@ -216,6 +221,7 @@ class zoekalgoritme():
                                     voertuig.setZoneID(res.getZone())
                                     res.setToegewezenVoertuig(autoString)
                                     res.setReservatieToegewezen(True)
+                                    break
 
             for auto in voertuigen:
                 if auto.getZone() == "":
@@ -238,7 +244,7 @@ class zoekalgoritme():
 
     #####################################################################################################################
 
-    def zoekRubenHillClimbing(self, tijd, reservaties, voertuigen, zones, kost):
+    def zoekRubenHillClimbing(self, reservaties, voertuigen, zones, kost):
         save_reservaties = copy.deepcopy(reservaties)
         save_voertuigen = copy.deepcopy(voertuigen)
         save_kost = kost
@@ -269,7 +275,6 @@ class zoekalgoritme():
                 res.setToegewezenVoertuig(voertuigNaam)
                 res.setReservatieToegewezen(True)
 
-
         niewe_kost = self.bereken_kost(reservaties, voertuigen)
         if niewe_kost < save_kost:
             save_kost = niewe_kost
@@ -281,6 +286,8 @@ class zoekalgoritme():
             voertuigen = save_voertuigen
 
         return save_kost
+
+    #####################################################################################################################
 
     def find3largest(self, arr, output_array):
         arr_size = len(arr)
