@@ -178,15 +178,15 @@ class zoekalgoritme():
 
 
 #####################################################################################################################
-    def zoekRuben (self, tijd, reservaties, voertuigen, zones):
+    def zoekRuben(self, tijd, reservaties, voertuigen, zones):
         kost = self.bereken_kost(reservaties, voertuigen)
 
         while time.time() < tijd:
+
             kost = self.zoekRubenRandom(reservaties, voertuigen, zones, kost)
 
-            #oneSec = time.time() + 1oneSec = time.time() + 1
-            #while time.time() < oneSec:
-            kost = self.zoekRubenHillClimbing(reservaties, voertuigen, zones, kost)
+
+            #kost = self.zoekRubenHillClimbing(reservaties, voertuigen, zones, kost)
 
         return kost
 
@@ -307,7 +307,7 @@ class zoekalgoritme():
             save_reservaties = copy.deepcopy(reservaties)
             save_voertuigen = copy.deepcopy(voertuigen)
         else:
-            # deze weggooien
+            # oude herstellen weggooien
             reservaties = save_reservaties
             voertuigen = save_voertuigen
 
