@@ -72,7 +72,7 @@ class Reservatie():
     def getToegewezenVoertuig(self):
         return self.voertuigID
 
-    def setToegewezenVoertuig(self, voertuig):
-        self.voertuigID =voertuig
+    def setToegewezenVoertuig(self, voertuigNaam):
+        self.voertuigID =voertuigNaam
 
 
