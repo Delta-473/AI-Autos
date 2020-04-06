@@ -153,7 +153,7 @@ class zoekalgoritme():
                                 res.toegewezen = True
                                 break
 
-    def zoek(self, tijd, reservaties, voertuigen, zones):
+    def zoekChristophe(self, tijd, reservaties, voertuigen, zones):
 
         print(f"#reservaties {self.aantal_reservaties} #voertuigen {self.aantal_voertuigen} #zones {self.aantal_zones}")
         self.voertuig_zone = voertuigen
