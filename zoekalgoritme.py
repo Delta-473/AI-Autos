@@ -331,9 +331,10 @@ class zoekalgoritme():
         for res in reservaties:
             if res.isToegewezen():
                 for voertuig in voertuigen:
-                    if not (res.zoneID == voertuig.zoneID):
-                        som += int(res.getp2(), base=10)
-                        break
+                    if(res.getToegewezenVoertuig() == voertuig.getID()): #ToDo: optimalisatie
+                        if not (res.zoneID == voertuig.zoneID):
+                            som += int(res.getp2(), base=10)
+                            break
             else:
                 som += int(res.getp1(), base=10)
 
