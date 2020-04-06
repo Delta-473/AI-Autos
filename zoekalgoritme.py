@@ -123,22 +123,59 @@ class zoekalgoritme():
 
         self.nieuwe_init_oplossing(reservaties, voertuigen, zones)
 
-        '''i = 0
         for voertuig in voertuigen:
-            voertuig.zoneID = f"z{random.randint(0, self.aantal_zones)}"
+            voertuig.setZoneID(f"z{random.randint(0, self.aantal_zones)}")
 
-        # while i < self.aantal_voertuigen:
         self.voertuig_zone = voertuigen
         self.temp_voertuig_zone = self.voertuig_zone
-        self.kost = self.bereken_kost(reservaties, self.voertuig_zone)'''
+        self.save_kost = self.bereken_kost(reservaties, self.voertuig_zone)
 
-    def reservaties_toewijzen(self, reservaties):
-        for reservatie in reservaties:
+############################################################################################
+
+    def reservaties_toewijzen(self, reservaties, zones):
+        for res in reservaties:
+            zoneID = int(res.zoneID[1:])
+            naburigeZones = zones[zoneID].getZones()
             for voertuig in self.temp_voertuig_zone:
-                if reservatie.zoneID == voertuig.zoneID:
-                    if voertuig.id in reservatie.voertuigen:
-                        reservatie.voertuigId = voertuig.id
-                        reservatie.toegewezen = True
+                if res.zoneID == voertuig.zoneID:
+                    if voertuig.ID in res.voertuigen:
+                        if voertuig.kanWordenToegevoegdReservatie(res.getDag(), res.getStart(), res.getStart() + res.getDuur(), res.getResID()):
+                            voertuig.AddReservatie(res.getDag(), res.getStart(), res.getStart() + res.getDuur(),res.getResID())
+                            res.voertuigID = voertuig.ID
+                            res.toegewezen = True
+                            break
+                else:
+                    for buren in naburigeZones:
+                        if buren == voertuig.ID:
+                            if voertuig.kanWordenToegevoegdReservatie(res.getDag(), res.getStart(),res.getStart() + res.getDuur(), res.getResID()):
+                                voertuig.AddReservatie(res.getDag(), res.getStart(), res.getStart() + res.getDuur(),res.getResID())
+                                res.voertuigID = voertuig.ID
+                                res.toegewezen = True
+                                break
+
+    def zoekChristophe(self, tijd, reservaties, voertuigen, zones):
+
+        print(f"#reservaties {self.aantal_reservaties} #voertuigen {self.aantal_voertuigen} #zones {self.aantal_zones}")
+        self.voertuig_zone = voertuigen
+        self.temp_voertuig_zone = voertuigen
+        while time.time() < tijd:
+            # reservaties toewijzen
+            self.reservaties_toewijzen(reservaties, zones)
+
+            # wijzig random voertuig toe aan random zone
+            # self.temp_voertuig_zone[random.randint(0, self.aantal_voertuigen - 1)].zoneID = f"z{random.randint(0, self.aantal_zones - 1)}"
+
+            # bereken kost
+            nieuwe_kost = self.bereken_kost(reservaties, self.temp_voertuig_zone)
+
+            if self.save_kost > nieuwe_kost:
+                self.voertuig_zone = self.temp_voertuig_zone
+                self.save_kost = nieuwe_kost
+            else:
+                self.temp_voertuig_zone = self.voertuig_zone
+
+        return self.save_kost
+
 
 #####################################################################################################################
     def zoekRuben (self, tijd, reservaties, voertuigen, zones):
@@ -351,27 +388,9 @@ class zoekalgoritme():
 
 
 
-    def zoek(self, tijd, reservaties, voertuigen):
 
-        print(f"#reservaties {self.aantal_reservaties} #voertuigen {self.aantal_voertuigen} #zones {self.aantal_zones}")
 
-        while time.time() < tijd:
-            # reservaties toewijzen
-            self.reservaties_toewijzen(reservaties)
-
-            # wijzig random voertuig toe aan random zone
-            self.temp_voertuig_zone[random.randint(0, self.aantal_voertuigen - 1)].zoneID = f"z{random.randint(0, self.aantal_zones - 1)}"
-
-            # bereken kost
-            nieuwe_kost = self.bereken_kost(reservaties, self.temp_voertuig_zone)
-
-            if self.save_kost > nieuwe_kost:
-                self.voertuig_zone = self.temp_voertuig_zone
-                self.save_kost = nieuwe_kost
-            else:
-                self.temp_voertuig_zone = self.voertuig_zone
-
-        return self.save_kost
+    ####################################################################################################################
 
     def bereken_kost(self, reservaties, voertuigen):
         som = 0

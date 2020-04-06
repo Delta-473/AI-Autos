@@ -20,8 +20,10 @@ class Reservatie():
         self.start=start
         self.duur=duur
         self.voertuigen=voertuigen
-
-
+        self.voertuigenToegewezenVlag = []
+        for x in range (len(self.voertuigen)):
+            self.voertuigenToegewezenVlag.append(False)#NIETTOEGEWEZEN)
+        self.voertuigID
         self.pentalty1=p1
         self.pentalty2=p2
 
