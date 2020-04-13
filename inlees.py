@@ -21,7 +21,7 @@ class Inlees():
         line=self.file.readline()
 
         #Reversaties inlezen
-        print("contens of line",line)
+        #print("contens of line",line)
         line=line.split(': ')
         aantalRequests = int(line[1])
         #print(aantalRequests)
@@ -42,7 +42,7 @@ class Inlees():
             penalty2=line[7]
 
             res=Reservatie(request,zone,dag,start,duur,cars,penalty1,penalty2)
-            print(res)
+            #print(res)
             reservaties.append(res)
             self.res.append(res)
 
