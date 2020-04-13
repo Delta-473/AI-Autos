@@ -45,6 +45,7 @@ class Main():
 
         random.seed(self.seed)
         stoptijd = time.time() + float(self.time)
+        halvestop = time.time() + float(self.time)/2
 
         inlees = Inlees(self.ifilepath)
         inlees.lees(self.reservaties, self.zones, self.voertuigen)
@@ -52,8 +53,22 @@ class Main():
         zoek = zoekalgoritme(self.reservaties, self.voertuigen, self.zones)
         #self.penaltyscore = zoek.zoekChristophe(stoptijd, self.reservaties, self.voertuigen, self.zones)
 
-        self.penaltyscore = zoek.zoekRuben(stoptijd, self.reservaties, self.voertuigen, self.zones)
-        self.penaltyscore = zoek.zoekJeroen(stoptijd, self.reservaties, self.voertuigen, self.zones)
+
+        penaltyscoreRuben = zoek.zoekRuben(halvestop, self.reservaties, self.voertuigen, self.zones)
+        RubenRes= self.reservaties
+        RubenCar = self.voertuigen
+        RubenZone =  self.zones
+
+        penaltyscoreJeroen = zoek.zoekJeroen(stoptijd, self.reservaties, self.voertuigen, self.zones)
+
+        if (penaltyscoreRuben < penaltyscoreJeroen):
+            self.penaltyscore= penaltyscoreRuben
+            self.reservaties = RubenRes
+            self.voertuigen = RubenCar
+            self.zones = RubenZone
+
+        else:
+            self.penaltyscore= penaltyscoreJeroen
         #self.penaltyscore = zoek.bereken_kost(self.reservaties, self.voertuigen)
 
         output = Output(self.ofilepath)

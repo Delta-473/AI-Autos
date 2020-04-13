@@ -232,7 +232,7 @@ class zoekalgoritme():
         kost = self.bereken_kost(reservaties, voertuigen)
 
 
-        while time.time() < tijd/2:
+        while time.time() < tijd:
 
             kost = self.zoekRubenRandom(reservaties, voertuigen, zones, kost)
 
@@ -390,7 +390,7 @@ class zoekalgoritme():
         for auto in voertuigen:
             auto.setZoneID(random.choice(Largest))
 
-        while time.time() < tijd/2:
+        while time.time() < tijd:
             kost = self.jeroen_calc(reservaties, voertuigen, zones, kost)
             # optionele code voor voertuig aan buren
             '''for jv in voertuigen:
