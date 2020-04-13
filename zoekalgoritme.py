@@ -218,10 +218,11 @@ class zoekalgoritme():
 
             if self.save_kost > nieuwe_kost:
                 self.voertuig_zone = copy.deepcopy(self.temp_voertuig_zone)
-                self.save_kost = nieuwe_kost
+                self.save_kost = copy.deepcopy(nieuwe_kost)
                 reservaties = copy.deepcopy(self.temp_reservaties)
             else:
                 self.temp_voertuig_zone = copy.deepcopy(self.voertuig_zone)
+                self.temp_reservaties = copy.deepcopy(reservaties)
 
         return self.save_kost
 
