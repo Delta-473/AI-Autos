@@ -35,6 +35,7 @@ class Voertuig():
         for i in range(0, aantalRes - 1):
             if(self.voertuig_bezettingen[i].resID == ID):
                 self.voertuig_bezetting = np.delete(self.voertuig_bezettingen, i, 0)
+                break
 
     def AddReservatie(self, dag, start, einde, resID):
         self.voertuig_bezettingen.append(VoertuigBezet(dag, start, einde, resID))

@@ -23,7 +23,6 @@ class Reservatie():
         self.voertuigenToegewezenVlag = []
         for x in range (len(self.voertuigen)):
             self.voertuigenToegewezenVlag.append(False)#NIETTOEGEWEZEN)
-        self.voertuigID
         self.pentalty1=p1
         self.pentalty2=p2
 

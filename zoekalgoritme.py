@@ -156,12 +156,40 @@ class zoekalgoritme():
                                 oplossingBuur.append(res.getStart() + res.getDuur())
                                 oplossingBuur.append(res.getResID())
                                 oplossingBuur.append(voertuig.ID)
-
                                 break
             if oplossingGevondenInZone == False and len(oplossingBuur) != 0:
                 voertuig.AddReservatie(oplossingBuur[0], oplossingBuur[1], oplossingBuur[2], oplossingBuur[3])
                 res.voertuigID = oplossingBuur[4]
                 res.toegewezen = True
+
+    def valideerReservaties(self, reservaties, voertuigen, zones):
+    #ToDo: efficienter maken
+        for res in reservaties:
+            if res.toegewezen: #reservatie is toegewezen
+                res_voer = res.getToegewezenVoertuig
+                #overloop voertuigen
+                for voertuig in voertuigen:
+                    if voertuig.getID() == res.voertuigID:
+                        #valideer of voegtuig in dezelfde zone of naburige zone ligt
+                        if res.getZone == voertuig.getZone():
+                            continue
+                        else:
+                            zoneID = voertuig.getZone()
+                            for zone in zones:
+                                if zone.isBuur(zoneID):
+                                    break
+                                else:
+                                    #Voertuig ligt niet in geldige zone
+                                    res.setToegewezenVoertuig = ""
+                                    #int(res_voer[3:]) is het voertuig id
+                                    voertuig.deleteReservatieByID(res.getResID)
+                                    #voertuigen[int(res_voer[3:])].deleteReservatieByID(res.getResID)
+                                    break
+                    else:
+                        continue
+                pass
+            else:
+                continue
 
     def zoekChristophe(self, tijd, reservaties, voertuigen, zones):
 
@@ -173,7 +201,10 @@ class zoekalgoritme():
             self.reservaties_toewijzen(reservaties, zones)
 
             # wijzig random voertuig toe aan random zone
-            # self.temp_voertuig_zone[random.randint(0, self.aantal_voertuigen - 1)].zoneID = f"z{random.randint(0, self.aantal_zones - 1)}"
+            self.temp_voertuig_zone[random.randint(0, self.aantal_voertuigen - 1)].zoneID = f"z{random.randint(0, self.aantal_zones - 1)}"
+
+            #validatie van reservaties
+            self.valideerReservaties(reservaties, voertuigen, zones)
 
             # bereken kost
             nieuwe_kost = self.bereken_kost(reservaties, self.temp_voertuig_zone)
