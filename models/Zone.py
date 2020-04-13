@@ -6,9 +6,6 @@ class Zone():
         self.zoneID= zoneID
         self.neighbours = neighbours
 
-    def getName(self):
-        return self.zoneID
-
     def getZones(self):
         return self.neighbours
 

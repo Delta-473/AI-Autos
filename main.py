@@ -50,15 +50,15 @@ class Main():
         inlees.lees(self.reservaties, self.zones, self.voertuigen)
 
         zoek = zoekalgoritme(self.reservaties, self.voertuigen, self.zones)
-        self.penaltyscore = zoek.zoekChristophe(stoptijd, self.reservaties, self.voertuigen, self.zones)
+        #self.penaltyscore = zoek.zoekChristophe(stoptijd, self.reservaties, self.voertuigen, self.zones)
 
-        #self.penaltyscore = zoek.zoekRubenVersie(stoptijd, self.reservaties, self.voertuigen, self.zones)
-        #self.penaltyscore = zoek.zoekJeroenVersie(stoptijd, self.reservaties, self.voertuigen, self.zones)
+        self.penaltyscore = zoek.zoekRuben(stoptijd, self.reservaties, self.voertuigen, self.zones)
+        self.penaltyscore = zoek.zoekJeroen(stoptijd, self.reservaties, self.voertuigen, self.zones)
         #self.penaltyscore = zoek.bereken_kost(self.reservaties, self.voertuigen)
 
         output = Output(self.ofilepath)
 
         output.schrijven(self.penaltyscore, self.reservaties, self.voertuigen)
-
+    # java -jar validator.jar ./data/toy1.csv ./data/test.csv
 
 Main().main()

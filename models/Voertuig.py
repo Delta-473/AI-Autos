@@ -8,8 +8,6 @@ class Voertuig():
     zoneID= ""
     voertuig_bezettingen = []
 
-    def setZoneID(self,zone):
-        self.zoneID=zone
 
     def __init__(self,ID):
         self.ID=ID
@@ -23,6 +21,9 @@ class Voertuig():
 
     def getZone(self):
         return self.zoneID
+
+    def setZoneID(self, zone):
+        self.zoneID = zone
 
     def getReservaties(self):
         return self.voertuig_bezettingen

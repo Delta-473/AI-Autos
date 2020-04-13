@@ -4,6 +4,7 @@ from models.Voertuig import Voertuig
 
 class Output():
     file = None
+    #log= open('data/log_jeroen.txt', "a+")
     buffer = ""
 
     def __init__(self, filepath):
@@ -13,6 +14,7 @@ class Output():
 
         #penaltyscore
         self.buffer = f"{penaltyscore} \n"
+        #self.log.write(f"{penaltyscore} \n")
 
         #Vehicle assignments
         self.buffer += "+Vehicle assignments\n"
@@ -31,5 +33,5 @@ class Output():
             if not reservatie.isToegewezen():
                 self.buffer += f"{reservatie.resID}\n"
 
-        #self.file.write(self.buffer)
+        self.file.write(self.buffer)
         self.file.close()
