@@ -124,7 +124,7 @@ class zoekalgoritme():
         self.nieuwe_init_oplossing(reservaties, voertuigen, zones)
 
         for voertuig in voertuigen:
-            voertuig.setZoneID(f"z{random.randint(0, self.aantal_zones)}")
+            voertuig.setZoneID(f"z{random.randint(0, self.aantal_zones - 1)}")
 
         self.voertuig_zone = voertuigen
         self.temp_voertuig_zone = self.voertuig_zone
@@ -139,6 +139,7 @@ class zoekalgoritme():
             oplossingBuur = []
             oplossingGevondenInZone = False
             for voertuig in self.temp_voertuig_zone:
+                #Voertuig ligt in dezelfde zone als request => beste oplossing
                 if res.zoneID == voertuig.zoneID:
                     if voertuig.ID in res.voertuigen:
                         if voertuig.kanWordenToegevoegdReservatie(res.getDag(), res.getStart(), res.getStart() + res.getDuur(), res.getResID()):
@@ -149,6 +150,7 @@ class zoekalgoritme():
                             break
                 else:
                     for buren in naburigeZones:
+                        #Voertuig ligt in naburige zone => tijdelijk opslaan en zoeken naar voertuig dat wel in dezelfde zone ligt
                         if buren == voertuig.zoneID:
                             if voertuig.kanWordenToegevoegdReservatie(res.getDag(), res.getStart(),res.getStart() + res.getDuur(), res.getResID()):
                                 oplossingBuur.append(res.getDag())
@@ -156,33 +158,71 @@ class zoekalgoritme():
                                 oplossingBuur.append(res.getStart() + res.getDuur())
                                 oplossingBuur.append(res.getResID())
                                 oplossingBuur.append(voertuig.ID)
-
                                 break
+            #Geen voertuig gevonden in dezelfde zone, neem dan oplossing van naburige zone als die er is
             if oplossingGevondenInZone == False and len(oplossingBuur) != 0:
                 voertuig.AddReservatie(oplossingBuur[0], oplossingBuur[1], oplossingBuur[2], oplossingBuur[3])
                 res.voertuigID = oplossingBuur[4]
                 res.toegewezen = True
 
+    def valideerReservaties(self, reservaties, voertuigen, zones):
+    #ToDo: efficienter maken
+        for res in reservaties:
+            if res.isToegewezen(): #reservatie is toegewezen
+                res_voer = res.getToegewezenVoertuig
+                #overloop voertuigen
+                for voertuig in voertuigen:
+                    if voertuig.getID() == res.voertuigID:
+                        #valideer of voegtuig in dezelfde zone of naburige zone ligt
+                        if res.getZone() == voertuig.getZone():
+                            continue
+                        else:
+                            zoneID = voertuig.getZone()
+                            for zone in zones:
+                                if zone.isBuur(zoneID):
+                                    break
+                                else:
+                                    #Voertuig ligt niet in geldige zone
+                                    res.setToegewezenVoertuig = ""
+                                    #int(res_voer[3:]) is het voertuig id
+                                    voertuig.deleteReservatieByID(res.getResID)
+                                    #voertuigen[int(res_voer[3:])].deleteReservatieByID(res.getResID)
+                                    res.toegewezen = False #klopt iets niets
+                                    break
+                    else:
+                        continue
+                pass
+            else:
+                continue
+
     def zoekChristophe(self, tijd, reservaties, voertuigen, zones):
 
         print(f"#reservaties {self.aantal_reservaties} #voertuigen {self.aantal_voertuigen} #zones {self.aantal_zones}")
         self.voertuig_zone = voertuigen
-        self.temp_voertuig_zone = voertuigen
+        self.temp_voertuig_zone = copy.deepcopy(voertuigen)
         while time.time() < tijd:
             # reservaties toewijzen
             self.reservaties_toewijzen(reservaties, zones)
+            self.temp_reservaties = copy.deepcopy(reservaties)
 
             # wijzig random voertuig toe aan random zone
-            # self.temp_voertuig_zone[random.randint(0, self.aantal_voertuigen - 1)].zoneID = f"z{random.randint(0, self.aantal_zones - 1)}"
+            self.temp_voertuig_zone[random.randint(0, self.aantal_voertuigen - 1)].zoneID = f"z{random.randint(0, self.aantal_zones - 1)}"
+
+            #validatie van reservaties
+            #self.valideerReservaties(reservaties, voertuigen, zones)
+            self.valideerReservaties(self.temp_reservaties, self.temp_voertuig_zone, zones)
+
 
             # bereken kost
-            nieuwe_kost = self.bereken_kost(reservaties, self.temp_voertuig_zone)
+            nieuwe_kost = self.bereken_kost(self.temp_reservaties, self.temp_voertuig_zone)
 
             if self.save_kost > nieuwe_kost:
-                self.voertuig_zone = self.temp_voertuig_zone
-                self.save_kost = nieuwe_kost
+                self.voertuig_zone = copy.deepcopy(self.temp_voertuig_zone)
+                self.save_kost = copy.deepcopy(nieuwe_kost)
+                reservaties = copy.deepcopy(self.temp_reservaties)
             else:
-                self.temp_voertuig_zone = self.voertuig_zone
+                self.temp_voertuig_zone = copy.deepcopy(self.voertuig_zone)
+                self.temp_reservaties = copy.deepcopy(reservaties)
 
         return self.save_kost
 

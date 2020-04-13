@@ -31,5 +31,5 @@ class Output():
             if not reservatie.isToegewezen():
                 self.buffer += f"{reservatie.resID}\n"
 
-        self.file.write(self.buffer)
+        #self.file.write(self.buffer)
         self.file.close()
