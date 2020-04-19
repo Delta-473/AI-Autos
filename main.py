@@ -3,7 +3,6 @@ import time
 import random
 import copy
 
-
 from inlees import Inlees
 from output import Output
 from zoekalgoritme import zoekalgoritme
@@ -37,7 +36,7 @@ class Main():
         self.ofilepath = args.solution_file
         self.time = args.time_limit
         self.seed = args.random_seed
-        self.threads = args.num_threads #ToDo: not implemented
+        self.threads = args.num_threads # not implemented
 
 
     def main(self):
@@ -61,15 +60,14 @@ class Main():
 
         penaltyscoreJeroen = zoek.zoekJeroen(stoptijd, self.reservaties, self.voertuigen, self.zones)
 
-        if (penaltyscoreRuben < penaltyscoreJeroen):
+        if penaltyscoreRuben < penaltyscoreJeroen:
             self.penaltyscore= penaltyscoreRuben
             self.reservaties = RubenRes
             self.voertuigen = RubenCar
             self.zones = RubenZone
 
         else:
-            self.penaltyscore= penaltyscoreJeroen
-        #self.penaltyscore = zoek.bereken_kost(self.reservaties, self.voertuigen)
+            self.penaltyscore = penaltyscoreJeroen
 
         output = Output(self.ofilepath)
 

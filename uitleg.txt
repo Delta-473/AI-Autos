@@ -1,1 +1,0 @@
-een overkoppelende classe (probleem klasse die een lijst van reservaties, ...°

@@ -166,7 +166,6 @@ class zoekalgoritme():
                 res.toegewezen = True
 
     def valideerReservaties(self, reservaties, voertuigen, zones):
-    #ToDo: efficienter maken
         for res in reservaties:
             if res.isToegewezen(): #reservatie is toegewezen
                 res_voer = res.getToegewezenVoertuig
@@ -459,7 +458,7 @@ class zoekalgoritme():
         for res in reservaties:
             if res.isToegewezen():
                 for voertuig in voertuigen:
-                    if(res.getToegewezenVoertuig() == voertuig.getID()): #ToDo: optimalisatie
+                    if(res.getToegewezenVoertuig() == voertuig.getID()):
                         if not (res.zoneID == voertuig.zoneID):
                             som += int(res.getp2(), base=10)
                             break
