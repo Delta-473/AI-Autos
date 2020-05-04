@@ -20,6 +20,9 @@ class Main():
     reservaties=[]
     zones=[]
     voertuigen=[]
+    reservaties2=[]
+    zones2=[]
+    voertuigen2=[]
 
     def __init__(self):
         pass
@@ -52,13 +55,16 @@ class Main():
         zoek = zoekalgoritme(self.reservaties, self.voertuigen, self.zones)
         #self.penaltyscore = zoek.zoekChristophe(stoptijd, self.reservaties, self.voertuigen, self.zones)
 
+        self.reservaties2 = copy.deepcopy(self.reservaties)
+        self.voertuigen2 = copy.deepcopy(self.voertuigen)
+        self.zones2 = copy.deepcopy(self.zones)
 
         penaltyscoreRuben = zoek.zoekRuben(halvestop, self.reservaties, self.voertuigen, self.zones)
         RubenRes= self.reservaties
         RubenCar = self.voertuigen
         RubenZone =  self.zones
 
-        penaltyscoreJeroen = zoek.zoekJeroen(stoptijd, self.reservaties, self.voertuigen, self.zones)
+        penaltyscoreJeroen = zoek.zoekJeroen(stoptijd, self.reservaties2, self.voertuigen2, self.zones2)
 
         if penaltyscoreRuben < penaltyscoreJeroen:
             self.penaltyscore= penaltyscoreRuben
@@ -68,6 +74,9 @@ class Main():
 
         else:
             self.penaltyscore = penaltyscoreJeroen
+            self.reservaties = copy.deepcopy(self.reservaties2)
+            self.voertuigen = copy.deepcopy(self.voertuigen2)
+            self.zones = copy.deepcopy(self.zones2)
 
         output = Output(self.ofilepath)
 
