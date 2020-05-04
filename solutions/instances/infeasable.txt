@@ -1,0 +1,8 @@
+solution1_instance03.csv
+
+solution3_instance03.csv
+
+
+solution1_instance04.csv
+solution2_instance04.csv
+solution3_instance04.csv

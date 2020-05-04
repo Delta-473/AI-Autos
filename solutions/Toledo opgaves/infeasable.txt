@@ -1,0 +1,2 @@
+We hebben nog steeds de bug er in zitten dat het soms een infeasable terug gaf, hier zien we dat de bug zich voordoet bij seed 2
+solution2_210_5_44_25.csv
